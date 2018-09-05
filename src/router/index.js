@@ -1,21 +1,24 @@
 import Vue from 'vue'
-import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
-import index from '@/view/index'
+import VueRouter from 'vue-router'
 
-Vue.use(Router)
+Vue.use(VueRouter)
 
-export default new Router({
-  routes: [
-    {
-      path: '/',
-      name: 'HelloWorld',
-      component: HelloWorld
-    },
-    {
-      path: '/index',
-      name: 'index',
-      component: index
-    }
-  ]
-})
+let router = new VueRouter({
+  routes: [ {
+    path: '/',
+    redirect: '/index'
+  }, {
+    path: '/index',
+    component: resolve => require(['../view/index.vue'], resolve),
+    name: '首页',
+  }, {
+    path: '/index',
+    component: resolve => require(['../view/report/report-list.vue'],resolve),
+    name: '报表列表',
+  }, {
+      path: '/report-detail',
+      component: resolve => require(['../view/report/report-detail'], resolve),
+      name: '报表详情',
+    }]
+});
+  export default router

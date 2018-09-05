@@ -1,6 +1,4 @@
-<style lang="scss" type="text/scss" scoped>
-    @import '../../assets/_rem.scss';
-</style>
+
 <template>
 
 </template>
@@ -10,3 +8,5 @@
 		name: "report-list"
 	}
 </script>
+<style lang="scss" scoped>
+</style>

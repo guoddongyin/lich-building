@@ -1,12 +1,13 @@
-<style lang="scss" type="text/scss" scoped>
-    @import '../../assets/_rem.scss';
-</style>
-<template>
 
+<template>
+  <div>
+    <mt-cell title="标题文字" value="说明文字"></mt-cell>
+    <mt-cell title="标题文字" value="说明文字"></mt-cell>
+  </div>
 </template>
 
 <script>
-	export default {
-		name: "report-detail"
-	}
+
 </script>
+<style lang="scss" type="text/scss" scoped>
+</style>

@@ -2,90 +2,87 @@
 <template>
   <div>
     <div class="index">
-      <div class="touxiang"><img src="../../static/img/touxi.png" alt=""/></div>
+      <div class="touxiang" @click="()=>{this.$router.push({path:'information',query:{}})}">
+        <img src="../../static/img/touxi.png" alt=""/></div>
       <div class="name">dsks</div>
-      <div class="jifen">
-        <div ></div>
-        <div ></div>
-      </div>
+      <!--<div>-->
+        <!--<div class="jifen">-->
+          <!--<p class="title">已使用积分</p>-->
+          <!--<p class="shuzi">eddd</p>-->
+        <!--</div>-->
+        <!--<div class="jifen">-->
+          <!--<p class="title">本月可用积分</p>-->
+          <!--<p class="shuzi">443545</p>-->
+        <!--</div>-->
+      <!--</div>-->
+
     </div>
     <div class="we-title">我的工具</div>
     <div class="weui-grids">
-      <a href="" class="weui-grid js_grid">
+      <div class="weui-grid js_grid">
         <div class="weui-grid__icon">
-          <img src="images/icon_nav_button.png" alt="">
+          <img src="../../static/img/icon-yhj.png" alt="">
         </div>
         <p class="weui-grid__label">
-          Button
+          我的优惠券
         </p>
-      </a>
-      <a href="" class="weui-grid js_grid">
+      </div>
+      <div class="weui-grid js_grid" @click="()=>{this.$router.push({path:'integral-detail',query:{}})}">
         <div class="weui-grid__icon">
-          <img src="images/icon_nav_cell.png" alt="">
+          <img src="../../static/img/icon-jf.png" alt="">
         </div>
         <p class="weui-grid__label">
-          List
+          积分明细
         </p>
-      </a>
-      <a href="" class="weui-grid js_grid">
+      </div>
+      <div class="weui-grid js_grid" @click="()=>{this.$router.push({path:'reportlist',query:{}})}">
         <div class="weui-grid__icon">
-          <img src="images/icon_nav_cell.png" alt="">
+          <img src="../../static/img/icon-dingdan.png" alt="">
         </div>
         <p class="weui-grid__label">
-          Form
+          我的订单
         </p>
-      </a>
-      <a href="" class="weui-grid js_grid">
+      </div>
+      <div class="weui-grid js_grid">
         <div class="weui-grid__icon">
-          <img src="images/icon_nav_cell.png" alt="">
+          <img src="../../static/img/icon-dch.png" alt="">
         </div>
         <p class="weui-grid__label">
-          Flex
+          待出货
         </p>
-      </a>
-      <a href="" class="weui-grid js_grid">
+      </div>
+      <div class="weui-grid js_grid">
         <div class="weui-grid__icon">
-          <img src="images/icon_nav_toast.png" alt="">
+          <img src="../../static/img/icon-dfk.png" alt="">
         </div>
         <p class="weui-grid__label">
-          Toast
+          待付款
         </p>
-      </a>
-      <a href="" class="weui-grid js_grid">
+      </div>
+      <div class="weui-grid js_grid" @click="()=>{this.$router.push({path:'brandprop',query:{}})}">
         <div class="weui-grid__icon">
-          <img src="images/icon_nav_dialog.png" alt="">
+          <img src="../../static/img/icon-pingp.png" alt="">
         </div>
         <p class="weui-grid__label">
-          Dialog
+          品牌占比
         </p>
-      </a>
-      <a href="" class="weui-grid js_grid">
+      </div>
+      <div class="weui-grid js_grid" @click="()=>{this.$router.push({path:'integralprop',query:{}})}">
         <div class="weui-grid__icon">
-          <img src="images/icon_nav_progress.png" alt="">
+          <img src="../../static/img/icon-jfbl.png" alt="">
         </div>
         <p class="weui-grid__label">
-          Progress
+          积分比例指导
         </p>
-      </a>
-      <a href="" class="weui-grid js_grid">
+      </div>
+      <div class="weui-grid js_grid">
         <div class="weui-grid__icon">
-          <img src="images/icon_nav_msg.png" alt="">
+          <img src="../../static/img/icon-xinyun.png" alt="">
         </div>
         <p class="weui-grid__label">
-          Msg
+            幸运大抽奖
         </p>
-      </a>
-      <a href="" class="weui-grid js_grid">
-        <div class="weui-grid__icon">
-          <img src="images/icon_nav_article.png" alt="">
-        </div>
-        <p class="weui-grid__label">
-          Article
-        </p>
-      </a>
-    </div>
-    <div class="we-grids">
-      a
+      </div>
     </div>
   </div>
 </template>
@@ -97,10 +94,9 @@
   .index{
     width:690px;
     height:380px;
-    margin: auto;
+    margin: 30px auto 0;
     background: url("../../static/img/heika.png");
-    /*background-size: 100% 100%;*/
-    background-size: cover;
+    background-size: 100% 100%;
     display: flex;
     .touxiang{
       width: 150px;
@@ -120,6 +116,13 @@
       font-size: 34px;
       color: #333;
     }
+    .jifen{
+      width: 100%;
+      display: flex;
+      .jifn{
+        width: 50%;
+      }
+    }
 
   }
   .we-title{
@@ -127,7 +130,7 @@
     color: #333333;
     font-size: 34px;
     width: 140px;
-    padding: 30px 10px;
+    padding: 30px;
   }
   .weui-grids {
     position: relative;
@@ -136,20 +139,29 @@
   .weui-grid {
     position: relative;
     float: left;
-    padding: 20px 10px;
+    padding:25px;
     width: 33.33333333%;
     box-sizing: border-box;
   }
   .weui-grid__icon {
-    width: 28px;
-    height: 28px;
+    width: 100px;
+    height: 100px;
     margin: 0 auto;
+    img{
+      width: 100%;
+      height: 100%;
+    }
   }
   .weui-footer, .weui-grid__label {
     text-align: center;
-    font-size: 14px;
+    font-size: 24px;
   }
   .weui-grid__icon+.weui-grid__label {
-    margin-top: 5px;
+    margin-top: 20px;
   }
 </style>
+
+
+
+
+

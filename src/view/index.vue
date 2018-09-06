@@ -5,16 +5,16 @@
       <div class="touxiang" @click="()=>{this.$router.push({path:'information',query:{}})}">
         <img src="../../static/img/touxi.png" alt=""/></div>
       <div class="name">dsks</div>
-      <!--<div>-->
-        <!--<div class="jifen">-->
-          <!--<p class="title">已使用积分</p>-->
-          <!--<p class="shuzi">eddd</p>-->
-        <!--</div>-->
-        <!--<div class="jifen">-->
-          <!--<p class="title">本月可用积分</p>-->
-          <!--<p class="shuzi">443545</p>-->
-        <!--</div>-->
-      <!--</div>-->
+      <div class="jifenn">
+        <div class="jifen">
+          <p class="title">已使用积分</p>
+          <p class="shuzi">1223</p>
+        </div>
+        <div class="jifen">
+          <p class="title">本月可用积分</p>
+          <p class="shuzi">443545</p>
+        </div>
+      </div>
 
     </div>
     <div class="we-title">我的工具</div>
@@ -97,7 +97,8 @@
     margin: 30px auto 0;
     background: url("../../static/img/heika.png");
     background-size: 100% 100%;
-    display: flex;
+    /*display: flex;*/
+    position: relative;
     .touxiang{
       width: 150px;
       height: 150px;
@@ -106,19 +107,47 @@
         width: 100%;
       }
     }
+    .jifenn{
+      position: absolute;
+      bottom: 50px;
+      left: 0;
+      width: 100%;
+      .jifen{
+        width: 50%;
+        text-align: center;
+        float: left;
+        .shuzi{
+          background-image: -webkit-gradient(linear, 0 0, 0 bottom, from(#eea76e), to(#ffdba9));
+           -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          font-size: 34px;
+        }
+       .title{
+         font-size: 22px;
+         background-image: -webkit-gradient(linear, 0 0, 0 bottom, from(#eea76e), to(#ffdba9));
+         -webkit-background-clip: text;
+         -webkit-text-fill-color: transparent;
+       }
+        p{
+          display: block;
+        }
+      }
+    }
     .name{
       width: 100px;
       height: 34px;
-      padding: 100px 0;
-      /*display:table-cell;*/
-      vertical-align:middle;
       text-align: left;
       font-size: 34px;
-      color: #333;
+      position: absolute;
+      top: 100px;
+      left: 200px;
+      /*color: #eea76e;*/
+      background-image: -webkit-gradient(linear, 0 0, 0 bottom, from(#eea76e), to(#ffdba9));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
     .jifen{
       width: 100%;
-      display: flex;
       .jifn{
         width: 50%;
       }

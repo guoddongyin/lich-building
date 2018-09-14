@@ -17,7 +17,7 @@
     },
       watch: {
           $route(to) {
-              var   token= this.$route.query.token;
+              var  token= this.$route.query.token;
               if(token){
                   localStorage.setItem('token',token)
               }

@@ -42,6 +42,9 @@
       border-right: 1px solid #ccc;
       padding: 30px 20px;
       font-size: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
     .pinpai{
       width: 70%;

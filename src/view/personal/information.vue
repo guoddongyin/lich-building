@@ -1,23 +1,25 @@
 <template>
   <div class="page-cell" style="margin-top: 10px">
     <mt-cell title="头像">
-      <div class="touxiang"><img src="../../../static/img/touxi.png" alt="" width="100%" height="100%"/></div>
+      <div class="touxiang"><img :src="personal.headimgurl" alt="" width="100%" height="100%"/></div>
     </mt-cell>
     <mt-cell title="昵称" is-link>
-      <span>这里是元素</span>
+      <span>{{ personal.nickname }}</span>
     </mt-cell>
-    <mt-cell title="手机号" value="说明文字"></mt-cell>
+    <mt-cell title="手机号">
+      <span>{{ personal.tel==null?"未填写":personal.tel}}</span>
+    </mt-cell>
     <mt-cell title="地区" is-link>
-      <span>这里是元素</span>
+      <span>{{personal.province}}</span>
     </mt-cell>
     <mt-cell title="详细地址" is-link @click.native="openPrompt">
-      <span></span>
+      <span>{{personal.address}}</span>
     </mt-cell>
     <mt-cell title="性别" is-link>
-      <span>这里是元素</span>
+      <span>{{personal.sex==2?"女":"男"}}</span>
     </mt-cell>
     <mt-cell title="生日" is-link @click.native="open('picker4')">
-      <span>这里是元素</span>
+      <span>{{personal.birthday}}</span>
     </mt-cell>
     <mt-cell title="解绑会员卡" is-link @click.native="openConfirm">
       <span></span>
@@ -41,10 +43,26 @@
       return {
         value4: null,
         visible4: false,
+        personal:[]//用户信息
       };
-
+    },
+    mounted(){
+      this.getinformation();
     },
     methods: {
+      //获取用户信息
+      getinformation:function () {
+        var that=this;
+        var datas={
+
+        }
+        that.$fetch('member', datas)
+          .then((response) => {
+            var personal = response.data;
+            that.personal = personal;
+            console.log(personal)
+          })
+      },
       openConfirm() {
         MessageBox.confirm('是否确认解绑会员卡?', '提示');
       },
@@ -69,6 +87,11 @@
       handleVisibleChange(isVisible) {
         console.log('弹窗是否展示:', isVisible);
       }
+    },
+    filters: {
+      text(s) {
+        return s === '' || s === 'null' ? '未填写' : s
+      },
     }
   };
 </script>

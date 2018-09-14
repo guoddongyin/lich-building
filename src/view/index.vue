@@ -4,21 +4,21 @@
     <div class="index">
       <div class="touxiang" @click="()=>{this.$router.push({path:'information',query:{}})}">
         <img src="../../static/img/touxi.png" alt=""/></div>
-      <div class="name">dsks</div>
+      <div class="name">{{oneinfo.cardname}}</div>
       <div class="jifenn">
         <div class="jifen">
           <p class="title">已使用积分</p>
-          <p class="shuzi">1223</p>
+          <p class="shuzi">{{oneinfo.SYJF}}</p>
         </div>
         <div class="jifen">
           <p class="title">本月可用积分</p>
-          <p class="shuzi">443545</p>
+          <p class="shuzi">{{oneinfo.KYJF}}</p>
         </div>
       </div>
-
     </div>
+
     <div class="we-title">我的工具</div>
-    <div class="weui-grids" >
+    <div class="weui-grids">
       <div class="weui-grid js_grid" @click="()=>{this.$router.push({path:'coupon',query:{}})}">
         <div class="weui-grid__icon">
           <img src="../../static/img/icon-yhj.png" alt="">
@@ -93,46 +93,30 @@
     name: "index",
     data() {
       return {
-        personalList:[],
-
+        oneinfo:[]//会员信息
       }
     },
     mounted(){
-      this.getpersonalList();
+      this.getinfoList();
     },
     methods: {
-      //跳转详情页
-      // go_del(id){
-      //   this.$router.push({path:'case_del',query:{id:id}})
-      // },
-      //请求个人中心列表
-      getpersonalList() {
+      //请求会员信息列表
+      getinfoList() {
         var that=this;
         var datas={
-          // wxid:window.localStorage.getItem('openid')
         }
-        that.$fetch('api/v1/oneinfo/wxid',datas)
+        that.$fetch('oneinfo', datas)
           .then((response) => {
-            if (response.code == 1) {
-              that.exampleList = response.data;
-            } else {
-              Toast({
-                message: response.msg,
-                position: 'middle',
-                duration: 5000
-              });
-            }
-
+            var oneinfo = response.data;
+            that.oneinfo = oneinfo;
+            console.log(oneinfo)
           })
       },
-
     },
     created() {
 
     },
-
   }
-
 </script>
 
 <style type="text/scss" lang="scss" scoped>
@@ -178,7 +162,7 @@
       }
     }
     .name{
-      width: 100px;
+      width: auto;
       text-align: left;
       font-size: 34px;
       position: absolute;

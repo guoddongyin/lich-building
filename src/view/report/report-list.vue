@@ -13,15 +13,10 @@
       <div class="jifen">品牌</div>
       <div class="jifen">品牌</div>
     </div>
-    <div class="integral-detail">
-      <div class="jifen">2018-08-01</div>
-      <div class="jifen">AB2132134</div>
-      <div class="jifen">1992元</div>
-    </div>
-    <div class="integral-detail">
-      <div class="jifen">2018-08-01</div>
-      <div class="jifen">AB2132134</div>
-      <div class="jifen">1992元</div>
+    <div class="integral-detail" v-for="item in reportlist">
+      <div class="jifen">{{item.time}}</div>
+      <div class="jifen">{{item.code}}</div>
+      <div class="jifen">{{item.price}}</div>
     </div>
   </div>
 </template>
@@ -36,11 +31,36 @@
         defaultResult: [
           'Apple',
           'Banana',
-
-        ]
+        ],
+        reportlist:[],
+        time:''
       };
     },
+    methods: {
+      //获取用户信息
+      getreportlist:function () {
+        var that=this;
+        var datas={
 
+        }
+        that.$fetch('orderinfo', datas)
+          .then((response) => {
+            var reportlist = response.data;
+            console.log(reportlist)
+            for(var i=0;i<=reportlist.length;i++){
+              var times = reportlist[i].time.split(' ')
+              that.time = times
+              console.log(times)
+              this.reportlist[i].time = times[0]
+             }
+            that.reportlist = reportlist;
+          })
+      },
+
+    },
+    mounted(){
+      this.getreportlist();
+    },
     computed: {
       filterResult() {
         return this.defaultResult.filter(value => new RegExp(this.value, 'i').test(value));

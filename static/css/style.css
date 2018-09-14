@@ -179,6 +179,7 @@
 }
 .mint-cell img {
     vertical-align:middle;
+  border-radius: 50%;
 }
 .mint-cell:first-child .mint-cell-wrapper {
     background-origin:border-box;

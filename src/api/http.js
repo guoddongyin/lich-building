@@ -77,7 +77,7 @@ export function fetch(url,params={}){
 
         })
             .then(response => {
-                if(response.data.code==0){
+                if(response.data.code==200){
                     resolve(response.data);
                 }else {
                     Toast({
@@ -113,7 +113,7 @@ export function post(url,data){
     return new Promise((resolve,reject) => {
         axios.post(global_.apiUrl+url,data)
             .then(response => {
-                if(response.data.code==0){
+                if(response.data.code==200){
                     resolve(response.data);
                 }else {
                     Toast({
@@ -144,7 +144,7 @@ export function patch(url,data = {}){
     return new Promise((resolve,reject) => {
         axios.patch(global_.apiUrl+url,data)
             .then(response => {
-                if(response.data.code==0){
+                if(response.data.code==200){
                     resolve(response.data);
                 }else {
                     Toast({
@@ -174,7 +174,7 @@ export function put(url,data = {}){
     return new Promise((resolve,reject) => {
         axios.put(global_.apiUrl+url,data)
             .then(response => {
-                if(response.data.code==0){
+                if(response.data.code==200){
                     resolve(response.data);
                 }else {
                     Toast({

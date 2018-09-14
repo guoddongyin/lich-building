@@ -2,34 +2,29 @@
 <template>
   <div class="couponlist">
     <p class="shuomin"><img src="../../../static/img/sysm.png" alt="" width="18px"/>使用说明</p>
-    <div class="coupons">
-      <div class="bianhao">编号：6263237</div>
+    <div class="coupons" v-for="item in couponlist">
+      <div class="bianhao">编号：{{item.Code}}</div>
       <div class="price">
-        <div class="jiage">100</div>
+        <div class="jiage">{{item.Money}}</div>
         <div>
           <p>RMB</p>
           <P class="youhuij">优惠券</P>
-          <P>满199元使用</P>
+          <P>{{item.Activity}}</P>
         </div>
       </div>
     </div>
-    <div class="coupons1">
-      <div class="bianhao">编号：6263237</div>
-      <div class="price">
-        <div class="jiage">100</div>
-        <div>
-          <p>RMB</p>
-          <P class="youhuij">优惠券</P>
-          <P>满199元使用</P>
-        </div>
-      </div>
-    </div>
+
   </div>
 </template>
 
 <script>
 	export default {
 		name: "coupon",
+        data(){
+		    return{
+                couponlist:[]
+            }
+        },
         mounted(){
 		  this.getcardlist();
         },
@@ -42,8 +37,9 @@
                 that.$fetch('coupon', datas)
                     .then((response) => {
                         var data = response.data;
+                        that.couponlist=data
                         console.log(data)
-                        that.orderPayr(data.order_sn)
+
                     })
 
             }

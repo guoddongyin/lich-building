@@ -4,18 +4,11 @@
       <div class="jifen">积分级别</div>
       <div class="pinpai">品牌</div>
     </div>
-    <div class="integral-fen">
-      <div class="jifen">高积分</div>
-      <div class="pinpai">芬驰、法兰特、微法、A++管、窗帘、饰品床品床品床品</div>
+    <div class="integral-fen" v-for="(item,index) in jfpslist" :key="index">
+      <div class="jifen">{{item.title}}</div>
+      <div class="pinpai">{{item.content}}</div>
     </div>
-    <div class="integral-fen">
-      <div class="jifen">中积分</div>
-      <div class="pinpai">芬驰、法兰特、微法、A++管、窗帘、饰品床品床品床品</div>
-    </div>
-    <div class="integral-fen">
-      <div class="jifen">低积分</div>
-      <div class="pinpai">芬驰、法兰特、微法、A++管、窗帘、饰品床品床品床品</div>
-    </div>
+
   </div>
 </template>
 <style lang="scss" type="text/scss" scoped>
@@ -60,7 +53,30 @@
 
 <script>
   export default {
-    name: "integralprop"
+    name: "integralprop",
+      data(){
+        return{
+              jfpslist:[]
+          }
+      },
+      mounted(){
+        this.getjfpslist();
+      },
+      methods:{
+          getjfpslist:function () {
+              var that=this;
+              var datas={
+
+              }
+              that.$fetch('jfps', datas)
+                  .then((response) => {
+                      var data = response.data;
+                      that.jfpslist=data;
+
+                  })
+
+          },
+      }
   }
 </script>
 

@@ -10,8 +10,8 @@ axios.interceptors.request.use(
 
     config => {
         // const token = getCookie('名称');注意使用的时候需要引入cookie方法，推荐js-cookie
-       // let token = global_.getUrlParam('token') || '';
-       let token='oX-MQwYTvbFYQUsgAG79VEQKUC6U';
+        let token = global_.getUrlParam('token') || '';
+      // let token='oX-MQwYTvbFYQUsgAG79VEQKUC6U';
         if(!token){
             token = window.localStorage.getItem('token') || '';
         }else {

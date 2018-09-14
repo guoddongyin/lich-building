@@ -31,4 +31,17 @@
 #app {
   margin-top: 0;
 }
+html {
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  max-width: 1200px;
+  height: 100%;
+  margin: auto;
+
+}
 </style>

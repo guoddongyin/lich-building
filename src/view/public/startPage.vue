@@ -11,7 +11,7 @@
         mounted(){
            var  urlink = window.localStorage.getItem('urlink');
             setTimeout(function () {
-                window.location.href = global_.apiUrl+'h5login?router='+urlink;
+                window.location.href = global_.apiUrl+'login?router='+urlink;
             },3000)
         }
     }

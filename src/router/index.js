@@ -11,7 +11,13 @@ let router = new VueRouter({
     component: resolve => require(['../view/index.vue'], resolve),
     name: '首页',
 
-  },{
+  }
+      , {
+          path: '/startpage',
+          component: resolve => require(['../view/public/startPage.vue'], resolve),
+          name: '登录',
+
+      },{
     path: '/information',
     component: resolve => require(['../view/personal/information.vue'], resolve),
     name: '个人信息',

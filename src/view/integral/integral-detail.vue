@@ -50,7 +50,7 @@
                 var datas = {}
                 that.$fetch('oneinfo', datas)
                     .then((response) => {
-                        var data = response.data[0];
+                        var data = response.data;
                         that.useroneinfo = data
 
                     })

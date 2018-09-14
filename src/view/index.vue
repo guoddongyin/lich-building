@@ -3,8 +3,11 @@
   <div>
     <div class="index">
       <div class="touxiang" @click="()=>{this.$router.push({path:'information',query:{}})}">
-        <img src="../../static/img/touxi.png" alt=""/></div>
-      <div class="name">{{oneinfo.cardname}}</div>
+        <img :src="member.headimgurl" alt=""/></div>
+      <div class="name">
+        <div>{{member.nickname}}</div>
+        <div style="margin-top: 10px">{{oneinfo.MemberType}}</div>
+      </div>
       <div class="jifenn">
         <div class="jifen">
           <p class="title">已使用积分</p>
@@ -93,11 +96,14 @@
     name: "index",
     data() {
       return {
-        oneinfo:[]//会员信息
+          member:[],//会员信息
+          oneinfo:[],//会员信息
+
       }
     },
     mounted(){
       this.getinfoList();
+      this.getmemberList();
     },
     methods: {
       //请求会员信息列表
@@ -111,6 +117,17 @@
             that.oneinfo = oneinfo;
             console.log(oneinfo)
           })
+      },
+
+      getmemberList() {
+          var that=this;
+          var datas={
+          }
+          that.$fetch('member', datas)
+              .then((response) => {
+                  var member = response.data;
+                  that.member = member;
+              })
       },
     },
     created() {
@@ -133,6 +150,7 @@
       padding: 50px 40px;
       img{
         width: 100%;
+        border-radius:50%
       }
     }
     .jifenn{

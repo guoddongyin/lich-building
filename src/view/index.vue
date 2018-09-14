@@ -114,7 +114,12 @@
         that.$fetch('oneinfo', datas)
           .then((response) => {
             var oneinfo = response.data;
-            that.oneinfo = oneinfo;
+            if(oneinfo){
+                that.oneinfo = oneinfo;
+
+            }else {
+                that.$router.push({path:'/bindcard'})
+            }
             console.log(oneinfo)
           })
       },
@@ -202,7 +207,7 @@
     text-align: left;
     color: #333333;
     font-size: 34px;
-    width: 140px;
+    /*width: 140px;*/
     padding: 30px;
   }
   .weui-grids {

@@ -1,6 +1,6 @@
 <template>
     <div class="startpage">
-        <img src="/static/img/startpage.png" alt="">
+        <!--<img src="/static/img/startpage.png" alt="">-->
     </div>
 </template>
 

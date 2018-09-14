@@ -40,7 +40,7 @@ let router = new VueRouter({
   },{
     path: '/brandprop',
     component: resolve => require(['../view/brandprop/brandprop.vue'], resolve),
-    name: '绑定会员卡',
+    name: 'TOP5品牌占比',
   },{
     path: '/bindcard',
     component: resolve => require(['../view/enroll/bindcard.vue'], resolve),
@@ -48,7 +48,7 @@ let router = new VueRouter({
   },{
     path: '/registercard',
     component: resolve => require(['../view/enroll/registercard.vue'], resolve),
-    name: '绑定会员卡',
+    name: '注册会员',
   },{
     path: '/coupon',
     component: resolve => require(['../view/coupon/coupon.vue'], resolve),

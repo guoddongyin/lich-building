@@ -6,7 +6,8 @@
         <img :src="member.headimgurl" alt=""/></div>
       <div class="name">
         <div>{{member.nickname}}</div>
-        <div style="margin-top: 10px">{{oneinfo.MemberType}}</div>
+        <div style="margin-top: 10px" v-if="member.memberstatus==1">{{oneinfo.MemberCard}}</div>
+        <div style="margin-top: 10px" v-else @click="gotobangd">点击绑定会员卡</div>
       </div>
       <div class="jifenn">
         <div class="jifen">
@@ -106,6 +107,9 @@
       this.getmemberList();
     },
     methods: {
+        gotobangd:function () {
+            this.$router.push({path:'/bindcard'})
+        },
       //请求会员信息列表
       getinfoList() {
         var that=this;
@@ -118,7 +122,7 @@
                 that.oneinfo = oneinfo;
 
             }else {
-                that.$router.push({path:'/bindcard'})
+                //
             }
             console.log(oneinfo)
           })

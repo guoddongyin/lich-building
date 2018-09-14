@@ -5,10 +5,11 @@ import App from './App'
 //引入mintUI
 import MintUI from 'mint-ui'
 import router from './router'
+import VueWechatTitle from 'vue-wechat-title'
 import {post,fetch,patch,put} from './api/http'
 
 Vue.use(MintUI)
-
+Vue.use(VueWechatTitle);
 
 Vue.prototype.$post=post;
 Vue.prototype.$fetch=fetch;

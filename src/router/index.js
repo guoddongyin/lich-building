@@ -10,6 +10,7 @@ let router = new VueRouter({
     path: '/index',
     component: resolve => require(['../view/index.vue'], resolve),
     name: '首页',
+
   },{
     path: '/information',
     component: resolve => require(['../view/personal/information.vue'], resolve),

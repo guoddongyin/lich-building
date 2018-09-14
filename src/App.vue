@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <router-view :openid='openid'></router-view>
+    <router-view v-wechat-title="$route.name"></router-view>
   </div>
 </template>
 

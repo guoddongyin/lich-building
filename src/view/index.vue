@@ -18,8 +18,8 @@
 
     </div>
     <div class="we-title">我的工具</div>
-    <div class="weui-grids">
-      <div class="weui-grid js_grid">
+    <div class="weui-grids" >
+      <div class="weui-grid js_grid" @click="()=>{this.$router.push({path:'coupon',query:{}})}">
         <div class="weui-grid__icon">
           <img src="../../static/img/icon-yhj.png" alt="">
         </div>
@@ -88,8 +88,53 @@
 </template>
 
 <script>
+  import { Toast } from 'mint-ui';
+  export default {
+    name: "index",
+    data() {
+      return {
+        personalList:[],
+
+      }
+    },
+    mounted(){
+      this.getpersonalList();
+    },
+    methods: {
+      //跳转详情页
+      // go_del(id){
+      //   this.$router.push({path:'case_del',query:{id:id}})
+      // },
+      //请求个人中心列表
+      getpersonalList() {
+        var that=this;
+        var datas={
+          // wxid:window.localStorage.getItem('openid')
+        }
+        that.$fetch('api/v1/oneinfo/wxid',datas)
+          .then((response) => {
+            if (response.code == 1) {
+              that.exampleList = response.data;
+            } else {
+              Toast({
+                message: response.msg,
+                position: 'middle',
+                duration: 5000
+              });
+            }
+
+          })
+      },
+
+    },
+    created() {
+
+    },
+
+  }
 
 </script>
+
 <style type="text/scss" lang="scss" scoped>
   .index{
     width:690px;
@@ -97,7 +142,6 @@
     margin: 30px auto 0;
     background: url("../../static/img/heika.png");
     background-size: 100% 100%;
-    /*display: flex;*/
     position: relative;
     .touxiang{
       width: 150px;
@@ -135,13 +179,11 @@
     }
     .name{
       width: 100px;
-      height: 34px;
       text-align: left;
       font-size: 34px;
       position: absolute;
       top: 100px;
       left: 200px;
-      /*color: #eea76e;*/
       background-image: -webkit-gradient(linear, 0 0, 0 bottom, from(#eea76e), to(#ffdba9));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;

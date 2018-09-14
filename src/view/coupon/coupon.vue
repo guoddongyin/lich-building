@@ -1,0 +1,85 @@
+
+<template>
+  <div class="couponlist">
+    <p class="shuomin"><img src="../../../static/img/sysm.png" alt="" width="18px"/>使用说明</p>
+    <div class="coupons">
+      <div class="bianhao">编号：6263237</div>
+      <div class="price">
+        <div class="jiage">100</div>
+        <div>
+          <p>RMB</p>
+          <P class="youhuij">优惠券</P>
+          <P>满199元使用</P>
+        </div>
+      </div>
+    </div>
+    <div class="coupons1">
+      <div class="bianhao">编号：6263237</div>
+      <div class="price">
+        <div class="jiage">100</div>
+        <div>
+          <p>RMB</p>
+          <P class="youhuij">优惠券</P>
+          <P>满199元使用</P>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+	export default {
+		name: "coupon"
+	}
+</script>
+<style lang="scss" type="text/scss" scoped>
+  .couponlist{
+    width: 90%;
+    margin: 45px auto;
+    .coupons{
+      width: 100%;
+      height: 230px;
+      background-image: url("../../../static/img/ljsy.png");
+      background-size: 100% 100%;
+      margin-top: 30px;
+    }
+    .coupons1{
+      width: 100%;
+      height: 230px;
+      background-image: url("../../../static/img/yshiy.png");
+      background-size: 100% 100%;
+      margin-top: 30px;
+    }
+    .bianhao{
+      height: 50px;
+      padding-left: 50px;
+      line-height: 50px;
+      color: #fefefe;
+      font-size: 24px;
+    }
+    .price{
+      display: flex;
+      align-items: center;
+      height: 180px;
+      margin-left: 50px;
+      .jiage{
+        font-size: 123px;
+        color: #fefefe;
+      }
+      p{
+        font-size: 24px;
+        color: #fff;
+        padding-left: 10px;
+      }
+      .youhuij{
+        font-size: 46px;
+        color: #fce541;
+      }
+    }
+  }
+  .shuomin{
+    display: flex;
+    align-items: center;
+    justify-content:flex-end
+  }
+</style>

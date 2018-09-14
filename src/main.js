@@ -5,7 +5,8 @@ import App from './App'
 //引入mintUI
 import MintUI from 'mint-ui'
 import router from './router'
-//import router from './router/index'
+import {put,patch,fetch,post} from './api/api'
+Vue.prototype.$fetch = fetch
 Vue.use(MintUI)
 Vue.config.productionTip = false
 

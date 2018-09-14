@@ -42,6 +42,10 @@ let router = new VueRouter({
     path: '/registercard',
     component: resolve => require(['../view/enroll/registercard.vue'], resolve),
     name: '绑定会员卡',
+  },{
+    path: '/coupon',
+    component: resolve => require(['../view/coupon/coupon.vue'], resolve),
+    name: '我的优惠券',
   }]
 });
   export default router

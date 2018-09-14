@@ -5,9 +5,15 @@ import App from './App'
 //引入mintUI
 import MintUI from 'mint-ui'
 import router from './router'
-import {put,patch,fetch,post} from './api/api'
-Vue.prototype.$fetch = fetch
+import {post,fetch,patch,put} from './api/http'
+
 Vue.use(MintUI)
+
+
+Vue.prototype.$post=post;
+Vue.prototype.$fetch=fetch;
+Vue.prototype.$patch=patch;
+Vue.prototype.$put=put;
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */

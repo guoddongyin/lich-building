@@ -29,7 +29,25 @@
 
 <script>
 	export default {
-		name: "coupon"
+		name: "coupon",
+        mounted(){
+		  this.getcardlist();
+        },
+        methods:{
+		    getcardlist:function () {
+		        var that=this;
+		        var datas={
+
+                }
+                that.$fetch('coupon', datas)
+                    .then((response) => {
+                        var data = response.data;
+                        console.log(data)
+                        that.orderPayr(data.order_sn)
+                    })
+
+            }
+        }
 	}
 </script>
 <style lang="scss" type="text/scss" scoped>

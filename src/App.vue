@@ -10,26 +10,20 @@
     data(){
       return{
         url:'',//保存链接
-        openid:'',//存opid
       }
     },
-    watch: {},
     methods: {
-      get_info(){
-        var openid = 'oX-MQwYTvbFYQUsgAG79VEQKUC6U';
-        if(this.$route.query.openId!='' && this.$route.query.openId!=null && this.$route.query.openId!=undefined  ){
-          openid=this.$route.query.openId
-        }
-        var op_id=sessionStorage.getItem("openid");
-        if(op_id!='' && op_id!=null && op_id!=undefined){
-          openid=op_id
-        }
-        sessionStorage.setItem("openid",openid);
-      },
-      mounted() {
-        this.get_info()
-      },
+
     },
+      watch: {
+          $route(to) {
+              var   token= this.$route.query.token;
+              if(token){
+                  localStorage.setItem('token',token)
+              }
+
+          }
+      }
   }
 </script>
 

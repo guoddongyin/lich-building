@@ -64,7 +64,32 @@
           })
       },
       openConfirm() {
-        MessageBox.confirm('是否确认解绑会员卡?', '提示');
+        MessageBox.confirm('', {
+          message: '是否确认解绑会员卡?',
+          title: '提示',
+          confirmButtonText: '确定',
+          cancelButtonText: '取消'
+        }).then(action => {
+          if (action == 'confirm') {     //确认的回调
+            var that=this;
+            var datas={
+
+            }
+            that.$fetch('nobind', datas)
+              .then((response) => {
+                Toast({
+                  message: '解绑成功',
+                  position: 'center',
+                  duration: 3000
+                });
+              })
+          }
+        }).catch(err => {
+          if (err == 'cancel') {     //取消的回调
+            console.log(2);
+          }
+        });
+        //MessageBox.confirm('', '提示');
       },
       openPrompt() {
         MessageBox.prompt(' ', '请输入详细地址').then(({ value }) => {

@@ -14,9 +14,9 @@
       <div class="jifen">金额</div>
     </div>
     <div class="integral-detail" v-for="item in reportlist">
-      <div class="jifen">{{item.datetime}}</div>
-      <div class="jifen">{{item.code}}</div>
-      <div class="jifen">{{item.price}}</div>
+      <div class="jifen">{{item.CreateDate}}</div>
+      <div class="jifen">{{item.Code}}</div>
+      <div class="jifen">{{item.DocTotal}}</div>
     </div>
   </div>
 </template>
@@ -33,7 +33,7 @@
       };
     },
     methods: {
-      //获取用户信息
+      //获取待付款信息
       getreportlist:function () {
         var that=this;
         var datas={
@@ -45,10 +45,7 @@
             console.log(reportlist)
             reportlist.forEach(function(item,index){
               console.log(item);
-              var times = reportlist[index].datetime.substring(0,10)
-              console.log(times)
-              //that.time = times
-              //that.reportlist[index].time= times[index]
+              //var times = reportlist[index].datetime.substring(0,10)
             });
             that.reportlist = reportlist;
           })

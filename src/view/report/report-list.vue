@@ -49,10 +49,7 @@
             console.log(reportlist)
             reportlist.forEach(function(item,index){
               console.log(item);
-              var times = reportlist[index].time.substring(0,10)
-              console.log(times)
-              //that.time = times
-              //that.reportlist[index].time= times[index]
+
             });
             that.reportlist = reportlist;
           })

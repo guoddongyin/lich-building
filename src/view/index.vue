@@ -6,9 +6,9 @@
         <img :src="member.headimgurl" alt=""/></div>
       <div class="name">
         <div>{{member.nickname}}</div>
-        <div style="margin-top: 10px" v-if="member.memberstatus==1">{{oneinfo.MemberCard}}</div>
-        <div class="bangdin" v-else @click="gotobangd">点击绑定会员卡</div>
+        <div class="bangdin" v-if="member.memberstatus!=1" @click="gotobangd">点击绑定会员卡</div>
       </div>
+      <div class="bangdin1" v-if="member.memberstatus==1">{{oneinfo.MemberType}}</div>
       <div class="jifenn">
         <div class="jifen">
           <p class="title">已使用积分</p>
@@ -153,6 +153,15 @@
      background: url("../../static/img/heika.png");
      background-size: 100% 100%;
      position: relative;
+    .bangdin1{
+      font-size: 24px;
+      position: absolute;
+      top: 40px;
+      right: 40px;
+      background-image: -webkit-gradient(linear, 0 0, 0 bottom, from(#eea76e), to(#ffdba9));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
      .touxiang{
        width: 150px;
        height: 150px;
@@ -199,6 +208,7 @@
        -webkit-background-clip: text;
        -webkit-text-fill-color: transparent;
      }
+
      .bangdin{
        font-size: 24px;
        margin-top: 10px
@@ -218,6 +228,15 @@
     background: url("../../static/img/jinka.png");
     background-size: 100% 100%;
     position: relative;
+    .bangdin1{
+      font-size: 24px;
+      position: absolute;
+      top: 40px;
+      right: 40px;
+      background-image: -webkit-gradient(linear, 0 0, 0 bottom, from(#4e3623), to(#69512e));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
     .touxiang{
       width: 150px;
       height: 150px;

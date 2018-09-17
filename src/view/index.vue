@@ -1,29 +1,29 @@
 
 <template>
   <div>
-    <div class="index">
-      <div class="touxiang" @click="()=>{this.$router.push({path:'information',query:{}})}">
+    <div class="index1">
+      <div class="touxiang" @click="()=>{this.$router.push({path:'/information',query:{}})}">
         <img :src="member.headimgurl" alt=""/></div>
       <div class="name">
         <div>{{member.nickname}}</div>
         <div style="margin-top: 10px" v-if="member.memberstatus==1">{{oneinfo.MemberCard}}</div>
-        <div style="margin-top: 10px" v-else @click="gotobangd">点击绑定会员卡</div>
+        <div class="bangdin" v-else @click="gotobangd">点击绑定会员卡</div>
       </div>
       <div class="jifenn">
         <div class="jifen">
           <p class="title">已使用积分</p>
-          <p class="shuzi">{{oneinfo.SYJF}}</p>
+          <p class="shuzi">{{oneinfo.SYJF==null?0:oneinfo.SYJF}}</p>
         </div>
         <div class="jifen">
           <p class="title">本月可用积分</p>
-          <p class="shuzi">{{oneinfo.KYJF}}</p>
+          <p class="shuzi">{{oneinfo.KYJF==null?0:oneinfo.KYJF}}</p>
         </div>
       </div>
     </div>
 
     <div class="we-title">我的工具</div>
     <div class="weui-grids">
-      <div class="weui-grid js_grid" @click="()=>{this.$router.push({path:'coupon',query:{}})}">
+      <div class="weui-grid js_grid" @click="()=>{this.$router.push({path:'/coupon',query:{}})}">
         <div class="weui-grid__icon">
           <img src="../../static/img/icon-yhj.png" alt="">
         </div>
@@ -31,7 +31,7 @@
           我的优惠券
         </p>
       </div>
-      <div class="weui-grid js_grid" @click="()=>{this.$router.push({path:'integral-detail',query:{}})}">
+      <div class="weui-grid js_grid" @click="()=>{this.$router.push({path:'/integral-detail',query:{}})}">
         <div class="weui-grid__icon">
           <img src="../../static/img/icon-jf.png" alt="">
         </div>
@@ -39,7 +39,7 @@
           积分明细
         </p>
       </div>
-      <div class="weui-grid js_grid" @click="()=>{this.$router.push({path:'reportlist',query:{}})}">
+      <div class="weui-grid js_grid" @click="()=>{this.$router.push({path:'/reportlist',query:{}})}">
         <div class="weui-grid__icon">
           <img src="../../static/img/icon-dingdan.png" alt="">
         </div>
@@ -47,7 +47,7 @@
           我的订单
         </p>
       </div>
-      <div class="weui-grid js_grid">
+      <div class="weui-grid js_grid" @click="()=>{this.$router.push({path:'/daichuhuo',query:{}})}">
         <div class="weui-grid__icon">
           <img src="../../static/img/icon-dch.png" alt="">
         </div>
@@ -55,7 +55,7 @@
           待出货
         </p>
       </div>
-      <div class="weui-grid js_grid">
+      <div class="weui-grid js_grid" @click="()=>{this.$router.push({path:'/daifukuan',query:{}})}">
         <div class="weui-grid__icon">
           <img src="../../static/img/icon-dfk.png" alt="">
         </div>
@@ -63,7 +63,7 @@
           待付款
         </p>
       </div>
-      <div class="weui-grid js_grid" @click="()=>{this.$router.push({path:'brandprop',query:{}})}">
+      <div class="weui-grid js_grid" @click="()=>{this.$router.push({path:'/brandprop',query:{}})}">
         <div class="weui-grid__icon">
           <img src="../../static/img/icon-pingp.png" alt="">
         </div>
@@ -71,7 +71,7 @@
           品牌占比
         </p>
       </div>
-      <div class="weui-grid js_grid" @click="()=>{this.$router.push({path:'integralprop',query:{}})}">
+      <div class="weui-grid js_grid" @click="()=>{this.$router.push({path:'/integralprop',query:{}})}">
         <div class="weui-grid__icon">
           <img src="../../static/img/icon-jfbl.png" alt="">
         </div>
@@ -147,10 +147,75 @@
 
 <style type="text/scss" lang="scss" scoped>
   .index{
+     width:690px;
+     height:380px;
+     margin: auto;
+     background: url("../../static/img/heika.png");
+     background-size: 100% 100%;
+     position: relative;
+     .touxiang{
+       width: 150px;
+       height: 150px;
+       padding: 50px 40px;
+       img{
+         width: 100%;
+         border-radius:50%
+       }
+     }
+     .jifenn{
+       position: absolute;
+       bottom: 50px;
+       left: 0;
+       width: 100%;
+       .jifen{
+         width: 50%;
+         text-align: center;
+         float: left;
+         .shuzi{
+           background-image: -webkit-gradient(linear, 0 0, 0 bottom, from(#eea76e), to(#ffdba9));
+           -webkit-background-clip: text;
+           -webkit-text-fill-color: transparent;
+           font-size: 34px;
+         }
+         .title{
+           font-size: 22px;
+           background-image: -webkit-gradient(linear, 0 0, 0 bottom, from(#eea76e), to(#ffdba9));
+           -webkit-background-clip: text;
+           -webkit-text-fill-color: transparent;
+         }
+         p{
+           display: block;
+         }
+       }
+     }
+     .name{
+       width: auto;
+       text-align: left;
+       font-size: 34px;
+       position: absolute;
+       top: 100px;
+       left: 200px;
+       background-image: -webkit-gradient(linear, 0 0, 0 bottom, from(#eea76e), to(#ffdba9));
+       -webkit-background-clip: text;
+       -webkit-text-fill-color: transparent;
+     }
+     .bangdin{
+       font-size: 24px;
+       margin-top: 10px
+     }
+     .jifen{
+       width: 100%;
+       .jifn{
+         width: 50%;
+       }
+     }
+
+   }
+  .index1{
     width:690px;
     height:380px;
-    margin: 30px auto 0;
-    background: url("../../static/img/heika.png");
+    margin: auto;
+    background: url("../../static/img/jinka.png");
     background-size: 100% 100%;
     position: relative;
     .touxiang{
@@ -172,17 +237,17 @@
         text-align: center;
         float: left;
         .shuzi{
-          background-image: -webkit-gradient(linear, 0 0, 0 bottom, from(#eea76e), to(#ffdba9));
-           -webkit-background-clip: text;
+          background-image: -webkit-gradient(linear, 0 0, 0 bottom, from(#4e3623), to(#69512e));
+          -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
           font-size: 34px;
         }
-       .title{
-         font-size: 22px;
-         background-image: -webkit-gradient(linear, 0 0, 0 bottom, from(#eea76e), to(#ffdba9));
-         -webkit-background-clip: text;
-         -webkit-text-fill-color: transparent;
-       }
+        .title{
+          font-size: 22px;
+          background-image: -webkit-gradient(linear, 0 0, 0 bottom, from(#4e3623), to(#69512e));
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+        }
         p{
           display: block;
         }
@@ -195,9 +260,13 @@
       position: absolute;
       top: 100px;
       left: 200px;
-      background-image: -webkit-gradient(linear, 0 0, 0 bottom, from(#eea76e), to(#ffdba9));
+      background-image: -webkit-gradient(linear, 0 0, 0 bottom, from(#4e3623), to(#69512e));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
+    }
+    .bangdin{
+      font-size: 24px;
+      margin-top: 10px
     }
     .jifen{
       width: 100%;
@@ -211,7 +280,6 @@
     text-align: left;
     color: #333333;
     font-size: 34px;
-    /*width: 140px;*/
     padding: 30px;
   }
   .weui-grids {

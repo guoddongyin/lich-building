@@ -16,7 +16,7 @@
         </div>
         <div class="we-title">积分明细</div>
         <div>
-            <mt-cell :title="item.jftype" :label="item.createdate" v-for="(item,index) in jflslist">
+            <mt-cell :title="item.jftype" :label="item.createdate" v-for="(item,index) in jflslist"  :key="index">
                 <span style="color: #eb4f4f">{{item.jf}}</span>
             </mt-cell>
 

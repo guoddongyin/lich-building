@@ -14,7 +14,7 @@
       <div class="jifen">金额</div>
     </div>
     <div class="integral-detail" v-for="item in reportlist">
-      <div class="jifen">{{item.time}}</div>
+      <div class="jifen">{{item.datetime}}</div>
       <div class="jifen">{{item.code}}</div>
       <div class="jifen">{{item.price}}</div>
     </div>
@@ -28,10 +28,6 @@
     data() {
       return {
         value: '',
-        defaultResult: [
-          'Apple',
-          'Banana',
-        ],
         reportlist:[],
         //time:''
       };
@@ -43,13 +39,13 @@
         var datas={
 
         }
-        that.$fetch('orderinfo', datas)
+        that.$fetch('staypay', datas)
           .then((response) => {
             var reportlist = response.data;
             console.log(reportlist)
             reportlist.forEach(function(item,index){
               console.log(item);
-              var times = reportlist[index].time.substring(0,10)
+              var times = reportlist[index].datetime.substring(0,10)
               console.log(times)
               //that.time = times
               //that.reportlist[index].time= times[index]
@@ -63,9 +59,9 @@
       this.getreportlist();
     },
     computed: {
-      filterResult() {
-        return this.defaultResult.filter(value => new RegExp(this.value, 'i').test(value));
-      }
+      // filterResult() {
+      //   return this.defaultResult.filter(value => new RegExp(this.value, 'i').test(value));
+      // }
     }
   };
 </script>

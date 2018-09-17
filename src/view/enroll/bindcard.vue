@@ -20,7 +20,7 @@
         },
         methods:{
             gotouser:function () {
-                // this.$router.push({path:'/registercard'})
+              this.$router.push({path:'/registercard'})
             },
             getbindcard:function () {
                 var that=this;

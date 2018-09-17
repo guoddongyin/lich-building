@@ -1,6 +1,5 @@
 
 <template>
-  <!-- 为 ECharts 准备一个具备大小（宽高）的 DOM -->
 <div>
   <div id="charts" style="width:90%;height:280px;margin: auto">
     <div class="pintitle">TOP5品牌占比</div>
@@ -20,7 +19,6 @@
       }
     },
     mounted() {
-
       this.getjftop5list();
     },
       methods:{

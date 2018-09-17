@@ -28,10 +28,6 @@
     data() {
       return {
         value: '',
-        defaultResult: [
-          'Apple',
-          'Banana',
-        ],
         reportlist:[],
         //time:''
       };
@@ -43,7 +39,7 @@
         var datas={
 
         }
-        that.$fetch('orderinfo', datas)
+        that.$fetch('stayshipment', datas)
           .then((response) => {
             var reportlist = response.data;
             console.log(reportlist)
@@ -63,9 +59,9 @@
       this.getreportlist();
     },
     computed: {
-      filterResult() {
-        return this.defaultResult.filter(value => new RegExp(this.value, 'i').test(value));
-      }
+      // filterResult() {
+      //   return this.defaultResult.filter(value => new RegExp(this.value, 'i').test(value));
+      // }
     }
   };
 </script>

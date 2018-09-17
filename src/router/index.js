@@ -11,13 +11,11 @@ let router = new VueRouter({
     component: resolve => require(['../view/index.vue'], resolve),
     name: '首页',
 
-  }
-      , {
-          path: '/startpage',
-          component: resolve => require(['../view/public/startPage.vue'], resolve),
-          name: '登录',
-
-      },{
+  }, {
+    path: '/startpage',
+      component: resolve => require(['../view/public/startPage.vue'], resolve),
+      name: '登录',
+  },{
     path: '/information',
     component: resolve => require(['../view/personal/information.vue'], resolve),
     name: '个人信息',
@@ -36,8 +34,17 @@ let router = new VueRouter({
     },{
     path: '/reportlist',
     component: resolve => require(['../view/report/report-list.vue'], resolve),
-    name: '下单报表',
-  },{
+    name: '我的订单',
+  }, {
+      path: '/daichuhuo',
+      component: resolve => require(['../view/report/daichuhuo-list'], resolve),
+      name: '待出货',
+    }
+    ,{
+      path: '/daifukuan',
+      component: resolve => require(['../view/report/daifukuan-list.vue'], resolve),
+      name: '待付款',
+    },{
     path: '/brandprop',
     component: resolve => require(['../view/brandprop/brandprop.vue'], resolve),
     name: 'TOP5品牌占比',
@@ -53,6 +60,10 @@ let router = new VueRouter({
     path: '/coupon',
     component: resolve => require(['../view/coupon/coupon.vue'], resolve),
     name: '我的优惠券',
+  },{
+    path: '/nomessage',
+    component: resolve => require(['../view/public/nomessage.vue'], resolve),
+    name: '无数据信息',
   }]
 });
   export default router

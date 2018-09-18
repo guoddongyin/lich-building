@@ -1,25 +1,25 @@
 <template>
-  <div class="page-cell" style="margin-top: 10px">
+  <div class="page-cell">
     <mt-cell title="头像">
       <div class="touxiang"><img :src="personal.headimgurl" alt="" width="100%" height="100%"/></div>
     </mt-cell>
-    <mt-cell title="昵称" is-link>
+    <mt-cell title="昵称">
       <span>{{ personal.nickname }}</span>
     </mt-cell>
     <mt-cell title="手机号">
-      <span>{{ personal.tel==null?"未填写":personal.tel}}</span>
+      <span>{{ personal.tel==null?"未绑定":personal.tel}}</span>
     </mt-cell>
     <mt-cell title="地区" is-link>
       <span>{{personal.province}}</span>
     </mt-cell>
     <mt-cell title="详细地址" is-link @click.native="openPrompt">
-      <span>{{personal.address}}</span>
+      <span>{{personal.address==null?"请输入详细地址":personal.address}}</span>
     </mt-cell>
     <mt-cell title="性别" is-link>
       <span>{{personal.sex==2?"女":"男"}}</span>
     </mt-cell>
     <mt-cell title="生日" is-link @click.native="open('picker4')">
-      <span>{{personal.birthday}}</span>
+      <span>{{personal.birthday==null?'请输入生日':personal.birthday}}</span>
     </mt-cell>
     <mt-cell title="解绑会员卡" is-link @click.native="openConfirm">
       <span></span>
@@ -54,7 +54,6 @@
       getinformation:function () {
         var that=this;
         var datas={
-
         }
         that.$fetch('member', datas)
           .then((response) => {
@@ -63,50 +62,70 @@
             console.log(personal)
           })
       },
+      //解绑会员卡
       openConfirm() {
-        MessageBox.confirm('', {
-          message: '是否确认解绑会员卡?',
-          title: '提示',
-          confirmButtonText: '确定',
-          cancelButtonText: '取消'
-        }).then(action => {
-          if (action == 'confirm') {     //确认的回调
-            var that=this;
-            var datas={
-
+        var that=this;
+        if(that.personal.memberstatus==1){
+          MessageBox.confirm('', {
+            message: '是否确认解绑会员卡?',
+            title: '提示',
+            confirmButtonText: '确定',
+            cancelButtonText: '取消'
+          }).then(action => {
+            if (action == 'confirm') {     //确认的回调
+              that.$fetch('nobind', datas)
+                .then((response) => {
+                  Toast({
+                    message: '解绑成功',
+                    position: 'center',
+                    duration: 3000
+                  });
+                })
             }
-            that.$fetch('nobind', datas)
-              .then((response) => {
-                Toast({
-                  message: '解绑成功',
-                  position: 'center',
-                  duration: 3000
-                });
-              })
-          }
-        }).catch(err => {
-          if (err == 'cancel') {     //取消的回调
-            console.log(2);
-          }
-        });
-        //MessageBox.confirm('', '提示');
+          }).catch(err => {
+            if (err == 'cancel') {     //取消的回调
+              console.log(2);
+            }
+          });
+        }else{
+          MessageBox.alert('', {
+            message: '您还未绑定会员卡',
+            title: '提示',
+          }).then(action => {
+          });
+        }
       },
+      //修改地址
       openPrompt() {
         MessageBox.prompt(' ', '请输入详细地址').then(({ value }) => {
+          var that=this;
           if (value) {
-            MessageBox.alert(`你的详细地址是 ${ value }`, '输入成功');
+            that.personal.address = value
           }
+            var datas={
+              address:that.personal.address
+            }
+            that.$post('updateinfo', datas)
+              .then((response) => {
+              })
         });
       },
       open(picker) {
         this.$refs[picker].open();
       },
-
+     //修改日期
       handleChange(value) {
-        Toast({
-          message: '已选择 ' + value.toString(),
-          position: 'bottom'
-        });
+        var that=this;
+        console.log(value)
+        var d = new Date(value);
+        var datetime = d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate()
+        this.personal.birthday = datetime
+        var datas={
+          birthday:this.personal.birthday
+        }
+        that.$fetch('updateinfo', datas)
+          .then((response) => {
+          })
       },
 
       handleVisibleChange(isVisible) {
@@ -114,9 +133,9 @@
       }
     },
     filters: {
-      text(s) {
-        return s === '' || s === 'null' ? '未填写' : s
-      },
+      // text(s) {
+      //   return s === '' || s === 'null' ? '未填写' : s
+      // },
     }
   };
 </script>
@@ -138,5 +157,6 @@
     width: 100px;
     height: 100px;
     border-radius: 50px;
+    padding: 15px 0;
   }
 </style>

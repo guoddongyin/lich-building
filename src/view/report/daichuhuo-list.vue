@@ -4,14 +4,20 @@
       <mt-search autofocus v-model="value" :result="filterResult"></mt-search>
     </div>
     <div class="integral-title">
-      <div class="shijian"><input type="date" placeholder="下单起止时间"/></div>
-      <div class="shijian"><input type="date" placeholder="下单结束时间"/></div>
+      <div class="shijian" ><input  placeholder="下单起止时间"/></div>
+      <div class="shijian" ><input  placeholder="下单结束时间"/></div>
       <div class="chaxun"><mt-button type="default">查询</mt-button></div>
     </div>
     <div class="integral-title">
       <div class="jifen">日期</div>
       <div class="jifen">单据号</div>
       <div class="jifen">金额</div>
+    </div>
+    <div class="nomes-content" v-if="reportlist.length==0">
+      <div class="nomes">
+        <img src='../../../static/img/nosj.png'></img>
+      </div>
+      <div class='zhu'>暂无订单信息</div>
     </div>
     <div class="integral-detail" v-for="item in reportlist">
       <div class="jifen">{{item.CreateDate}}</div>
@@ -56,14 +62,34 @@
       this.getreportlist();
     },
     computed: {
-      // filterResult() {
-      //   return this.defaultResult.filter(value => new RegExp(this.value, 'i').test(value));
-      // }
+      filterResult() {
+        return this.defaultResult.filter(value => new RegExp(this.value, 'i').test(value));
+      }
     }
   };
 </script>
 
 <style lang="scss" scoped>
+  .nomes-content{
+    width: 400px;
+    height:400px;
+    margin: auto;
+    text-align: center;
+  }
+  .nomes{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    img{
+      width: 100%;
+      height: 100%;
+      padding-top: 100px;
+    }
+    .zhu{
+      text-align: center;
+    }
+  }
   .page-search {
     height: 100%;
   }

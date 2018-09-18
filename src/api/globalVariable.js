@@ -1,8 +1,8 @@
 
 const apiUrl='http://wxlc.micmark.com/api/v1/';
 const imgUrl='http://wxlc.micmark.com';
-const wwwUrl='http://wxlc.micmark.com/';
-//const wwwUrl='http://localhost:8080/';
+//const wwwUrl='http://wxlc.micmark.com/';
+const wwwUrl='http://localhost:8080/';
 const gotoUrl='http://wxlc.micmark.com/';
 const userInfo=null;
 const token='';

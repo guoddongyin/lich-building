@@ -7,6 +7,7 @@
       <div class="name">
         <div>{{member.nickname}}</div>
         <div class="bangdin" v-if="member.memberstatus!=1" @click="gotobangd">点击绑定会员卡</div>
+        <div class="bangdin" v-else >{{oneinfo.MemberCard}}</div>
       </div>
       <div class="bangdin1" v-if="member.memberstatus==1">{{oneinfo.MemberType}}</div>
       <div class="jifenn">
@@ -29,6 +30,14 @@
         </div>
         <p class="weui-grid__label">
           我的优惠券
+        </p>
+      </div>
+      <div class="weui-grid js_grid" @click="()=>{this.$router.push({path:'/memberinfo',query:{}})}" v-if="member.memberstatus!=0">
+        <div class="weui-grid__icon">
+          <img src="../../static/img/hyxx.png" alt="">
+        </div>
+        <p class="weui-grid__label">
+          会员信息
         </p>
       </div>
       <div class="weui-grid js_grid" @click="()=>{this.$router.push({path:'/integral-detail',query:{}})}">
@@ -79,7 +88,7 @@
           积分比例指导
         </p>
       </div>
-      <div class="weui-grid js_grid">
+      <div class="weui-grid js_grid" @click="openConfirm">
         <div class="weui-grid__icon">
           <img src="../../static/img/icon-xinyun.png" alt="">
         </div>
@@ -92,14 +101,13 @@
 </template>
 
 <script>
-  import { Toast } from 'mint-ui';
+  import { MessageBox , Toast } from 'mint-ui';
   export default {
     name: "index",
     data() {
       return {
           member:[],//会员信息
           oneinfo:[],//会员信息
-
       }
     },
     mounted(){
@@ -138,7 +146,11 @@
                   that.member = member;
               })
       },
-    },
+      //提示正在开发中
+      openConfirm : function () {
+        Toast('该功能正在开发中!')
+      }
+  },
     created() {
 
     },
@@ -328,6 +340,7 @@
   .weui-grid__icon+.weui-grid__label {
     margin-top: 20px;
   }
+
 </style>
 
 

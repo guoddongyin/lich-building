@@ -10,7 +10,6 @@ let router = new VueRouter({
     path: '/index',
     component: resolve => require(['../view/index.vue'], resolve),
     name: '首页',
-
   }, {
     path: '/startpage',
       component: resolve => require(['../view/public/startPage.vue'], resolve),
@@ -61,6 +60,10 @@ let router = new VueRouter({
     component: resolve => require(['../view/coupon/coupon.vue'], resolve),
     name: '我的优惠券',
   },{
+      path: '/memberinfo',
+      component: resolve => require(['../view/personal/memberinfo.vue'], resolve),
+      name: '会员信息',
+    },{
     path: '/nomessage',
     component: resolve => require(['../view/public/nomessage.vue'], resolve),
     name: '无数据信息',

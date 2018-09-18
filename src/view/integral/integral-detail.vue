@@ -3,20 +3,26 @@
         <div class="integral-title">
             <div class="jifen">
                 <p class="title">已使用积分</p>
-                <p class="shuzi">{{useroneinfo.SYJF}}</p>
+                <p class="shuzi">{{useroneinfo.SYJF==null?0:useroneinfo.SYJF}}</p>
             </div>
             <div class="jifen">
                 <p class="title">本月可用积分</p>
-                <p class="shuzi">{{useroneinfo.KYJF}}</p>
+                <p class="shuzi">{{useroneinfo.KYJF==null?0:useroneinfo.KYJF}}</p>
             </div>
             <div class="jifen">
                 <p class="title">总积分</p>
-                <p class="shuzi">{{useroneinfo.TotalJF}}</p>
+                <p class="shuzi">{{useroneinfo.TotalJF==null?0:useroneinfo.TotalJF}}</p>
             </div>
         </div>
         <div class="we-title">积分明细</div>
         <div>
-            <mt-cell :title="item.jftype" :label="item.createdate" v-for="(item,index) in jflslist"  :key="index">
+          <div class="nomes-content" v-if="jflslist.length==0">
+            <div class="nomes">
+              <img src='../../../static/img/nosj.png'></img>
+            </div>
+            <div class='zhu'>暂无积分明细</div>
+          </div>
+            <mt-cell v-else :title="item.jftype" :label="item.createdate" v-for="(item,index) in jflslist"  :key="index">
                 <span style="color: #eb4f4f">{{item.jf}}</span>
             </mt-cell>
 
@@ -73,9 +79,9 @@
             }
         },
         computed: {
-            filterResult() {
-                return this.defaultResult.filter(value => new RegExp(this.value, 'i').test(value));
-            }
+            // filterResult() {
+            //     return this.defaultResult.filter(value => new RegExp(this.value, 'i').test(value));
+            // }
         }
     };
 </script>
@@ -84,7 +90,26 @@
     .page-search {
         height: 100%;
     }
-
+    .nomes-content{
+      width: 400px;
+      height:400px;
+      margin: auto;
+      text-align: center;
+    }
+    .nomes{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      img{
+        width: 100%;
+        height: 100%;
+        padding-top: 100px;
+      }
+      .zhu{
+        text-align: center;
+      }
+    }
     .integral-title {
         width: 100%;
         height: 230px;

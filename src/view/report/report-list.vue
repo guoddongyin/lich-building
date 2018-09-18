@@ -13,7 +13,13 @@
       <div class="jifen">单据号</div>
       <div class="jifen">金额</div>
     </div>
-    <div class="integral-detail" v-for="item in reportlist">
+    <div class="nomes-content" v-if="reportlist.length==0">
+      <div class="nomes">
+        <img src='../../../static/img/nosj.png'></img>
+      </div>
+      <div class='zhu'>暂无订单信息</div>
+    </div>
+    <div class="integral-detail" v-for="item in reportlist" v-else>
       <div class="jifen">{{item.time}}</div>
       <div class="jifen">{{item.code}}</div>
       <div class="jifen">{{item.price}}</div>
@@ -68,6 +74,26 @@
 </script>
 
 <style lang="scss" scoped>
+  .nomes-content{
+    width: 400px;
+    height:400px;
+    margin: auto;
+    text-align: center;
+  }
+  .nomes{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    img{
+      width: 100%;
+      height: 100%;
+      padding-top: 100px;
+    }
+    .zhu{
+      text-align: center;
+    }
+  }
   .page-search {
     height: 100%;
   }

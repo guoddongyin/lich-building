@@ -15,12 +15,13 @@
   .integral-title{
     width: 100%;
     height: 90px;
-    background-color: #f2f2f2;
+    background-color: #fff;
     display: flex;
     line-height: 90px;
     text-align: center;
     font-size: 30px;
     color: #333;
+    border-bottom: 1px solid #f2f2f2;
     .jifen{
       width: 30%;
       border-right: 1px solid #ccc;
@@ -45,11 +46,13 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      background-color: #fff;
     }
     .pinpai{
       width: 70%;
       padding: 30px 20px;
       font-size: 24px;
+      background-color: #fff;
     }
   }
 </style>
@@ -66,19 +69,15 @@
         this.getjfpslist();
       },
       methods:{
-          getjfpslist:function () {
-              var that=this;
-              var datas={
-
-              }
-              that.$fetch('jfps', datas)
-                  .then((response) => {
-                      var data = response.data;
-                      that.jfpslist=data;
-
-                  })
-
-          },
+        getjfpslist:function () {
+          var that=this;
+          var datas={}
+          that.$fetch('jfps', datas)
+            .then((response) => {
+              var data = response.data;
+              that.jfpslist=data;
+            })
+        },
       }
   }
 </script>

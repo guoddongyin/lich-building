@@ -4,8 +4,10 @@
       <mt-search autofocus v-model="value" :result="filterResult"></mt-search>
     </div>
     <div class="integral-title">
-      <div class="shijian"><input type="date" placeholder="下单起止时间"/></div>
-      <div class="shijian"><input type="date" placeholder="下单结束时间"/></div>
+      <div class="shijian" @click.native="open('picker4')" style="width: 100px;height:20px;border: 1px solid #ccc">
+        <!--<input  placeholder="下单起止时间"/>-->
+      </div>
+      <div class="shijian"><input  placeholder="下单结束时间"/></div>
       <div class="chaxun"><mt-button type="default">查询</mt-button></div>
     </div>
     <div class="integral-title">
@@ -13,21 +15,31 @@
       <div class="jifen">单据号</div>
       <div class="jifen">金额</div>
     </div>
-    <div class="nomes-content" v-if="reportlist.length==0">
+    <div class="nomes-content" v-if="reportlist.length==0&&statu">
       <div class="nomes">
-        <img src='../../../static/img/nosj.png'></img>
+        <img src='/static/img/nosj.png'></img>
       </div>
       <div class='zhu'>暂无订单信息</div>
     </div>
-    <div class="integral-detail" v-for="item in reportlist" v-else>
+    <div class="integral-detail" v-for="item in reportlist" @click="go_deil(item.ids)">
       <div class="jifen">{{item.time}}</div>
       <div class="jifen">{{item.code}}</div>
       <div class="jifen">{{item.price}}</div>
     </div>
+    <mt-datetime-picker
+      ref="picker4"
+      type="date"
+      v-model="value4"
+      year-format="{value} 年"
+      month-format="{value} 月"
+      date-format="{value} 日"
+      @confirm="handleChange">
+    </mt-datetime-picker>
   </div>
 </template>
 
 <script>
+  import { MessageBox , Toast } from 'mint-ui';
   export default {
     name: 'page-search',
 
@@ -38,28 +50,51 @@
           'Apple',
           'Banana',
         ],
+        statu:false,
         reportlist:[],
-        //time:''
+        value4: null,
+        visible4: false,
       };
     },
     methods: {
-      //获取用户信息
+      open(picker) {
+        this.$refs[picker].open();
+      },
+      //跳转详情页面
+      go_deil : function (id) {
+        this.$router.push({path:'/report-detail',query:{id:id}})
+      },
+      //获取订单信息
       getreportlist:function () {
         var that=this;
         var datas={
-
+          // wxid:localStorage.getItem('token')
         }
         that.$fetch('orderinfo', datas)
           .then((response) => {
+            that.statu = true;
             var reportlist = response.data;
-            console.log(reportlist)
-            reportlist.forEach(function(item,index){
-              console.log(item);
-
-            });
             that.reportlist = reportlist;
           })
       },
+      //修改日期
+      handleChange(value) {
+        var that=this;
+        console.log(value)
+        // var d = new Date(value);
+        // var datetime = d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate()
+        // this.personal.birthday = datetime
+        // var datas={
+        //   birthday:this.personal.birthday
+        // }
+        // that.$fetch('updateinfo', datas)
+        //   .then((response) => {
+        //   })
+      },
+
+      handleVisibleChange(isVisible) {
+        console.log('弹窗是否展示:', isVisible);
+      }
 
     },
     mounted(){
@@ -73,7 +108,20 @@
   };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss" type="text/scss" >
+  @component-namespace page {
+    @component msgbox {
+      @descendent wrapper {
+        padding: 0 20px;
+        /*<!--position: absolute 50% * * *;-->*/
+        width: 100%;
+        transform: translateY(-50%);
+        button:not(:last-child) {
+          margin-bottom: 20px;
+        }
+      }
+    }
+  }
   .nomes-content{
     width: 400px;
     height:400px;

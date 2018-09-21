@@ -25,7 +25,6 @@
           getjftop5list:function () {
               var that=this;
               var datas={
-
               }
               that.$fetch('jftop5', datas)
                   .then((response) => {
@@ -42,12 +41,9 @@
                               name:that.couponlist[i].brand
                           })
                       }
-
                       that.seteachart_botom(dataname,datavalue);
                       that.seteachart_top(dataradius)
-
                   })
-
           },
           /*ECharts图表*/
           seteachart_top:function (dataradius) {

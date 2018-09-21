@@ -1,7 +1,7 @@
 <template>
   <div class="page-part">
     <mt-field label="手机号" placeholder="请输入手机号" v-model="tel" type="tel"></mt-field>
-    <mt-field label="会员卡号" placeholder="请输入会员卡号" v-model="membercard" ></mt-field>
+    <mt-field label="会员卡号" placeholder="请输入会员卡号" v-model="membercard" type="tel" ></mt-field>
     <p class="zhuce" @click="gotouser">注册会员</p>
     <mt-button class="bangding" type="default" @click="getbindcard" size="large">绑定</mt-button>
   </div>

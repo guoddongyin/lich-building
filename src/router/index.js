@@ -21,7 +21,7 @@ let router = new VueRouter({
   },{
       path: '/report-detail',
       component: resolve => require(['../view/report/report-detail'], resolve),
-      name: '报表详情',
+      name: '订单详情',
     },{
       path: '/integralprop',
       component: resolve => require(['../view/integral/integralprop.vue'], resolve),
@@ -67,6 +67,22 @@ let router = new VueRouter({
     path: '/nomessage',
     component: resolve => require(['../view/public/nomessage.vue'], resolve),
     name: '无数据信息',
-  }]
+  },{
+      path: '/articlelist',
+      component: resolve => require(['../view/article/articlelist.vue'], resolve),
+      name: '文章列表',
+    },{
+      path: '/articledel',
+      component: resolve => require(['../view/article/articledel.vue'], resolve),
+      name: '文章详情',
+    // },{
+    //   path: '/main',
+    //   component: resolve => require(['../view/public/main.vue'], resolve),
+    //   name: '文章详情',
+    // },{
+    //   path: '/dialog',
+    //   component: resolve => require(['../view/public/dialog.vue'], resolve),
+    //   name: '文章详情',
+    }]
 });
   export default router

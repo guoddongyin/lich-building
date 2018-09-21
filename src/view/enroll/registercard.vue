@@ -1,7 +1,7 @@
 <template>
   <div class="page-part">
-    <mt-field label="姓名" placeholder="请输入姓名" type="tel" v-model="remark"></mt-field>
-    <mt-field label="手机号" placeholder="请输入手机号" type="number" v-model="tel"></mt-field>
+    <mt-field label="姓名" placeholder="请输入姓名"  v-model="remark"></mt-field>
+    <mt-field label="手机号" placeholder="请输入手机号" type="tel" v-model="tel"></mt-field>
     <mt-field label="验证码" placeholder="输入验证码" v-model="yzm" style="margin-bottom: 30px">
       <span class="yanzheng" v-if="!isSend" @click="sendcode">发送验证码</span>
       <span class="yanzheng" v-if="isSend">{{ times }}秒后获取</span>
@@ -40,8 +40,10 @@
         } else {
           that.$post('sendyzm', datas)
             .then((response) => {
-              var code = JSON.stringify( response.data.code );
+              console.log(response.data)
+              var code = response.data.yzm ;
               console.log(code)
+              that.code = code
               that.isSend = true;
               let interval = window.setInterval(function () {
                 if ((that.times--) <= 1) {
@@ -60,19 +62,20 @@
           remark:that.remark,
           yzm:that.yzm
         }
+        console.log(datas)
         if(that.tel == ''){
           Toast('电话号码不能为空')
         }else if(that.remark == ''){
           Toast('姓名不能为空')
         }else if( that.yzm == ''){
           Toast('验证码不能为空')
-        // }else if(that.yzm!==that.code){
-        //   Toast('验证码不正确')
+        }
+        else if(that.yzm!=that.code){
+          Toast('验证码不正确')
         }else{
           that.$post('register', datas)
             .then((response) => {
-              // Toast('注册成功')
-              that.$router.push({path:'/bindcard'})
+              that.$router.push({path:'/index'})
             })
         }
       }

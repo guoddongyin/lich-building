@@ -13,13 +13,13 @@
       <div class="jifen">单据号</div>
       <div class="jifen">金额</div>
     </div>
-    <div class="nomes-content" v-if="reportlist.length==0">
+    <div class="nomes-content" v-if="reportlist.length==0&&statu">
       <div class="nomes">
-        <img src='../../../static/img/nosj.png'></img>
+        <img src='/static/img/nosj.png'></img>
       </div>
       <div class='zhu'>暂无订单信息</div>
     </div>
-    <div class="integral-detail" v-for="item in reportlist">
+    <div class="integral-detail" v-for="item in reportlist" @click="go_deil(item.ids)">
       <div class="jifen">{{item.CreateDate}}</div>
       <div class="jifen">{{item.Code}}</div>
       <div class="jifen">{{item.DocTotal}}</div>
@@ -34,11 +34,20 @@
     data() {
       return {
         value: '',
+        defaultResult: [
+          'Apple',
+          'Banana',
+        ],
+        statu:false,
         reportlist:[],
         //time:''
       };
     },
     methods: {
+      //跳转详情页面
+      go_deil : function (id) {
+        this.$router.push({path:'/report-detail',query:{id:id}})
+      },
       //获取用户信息
       getreportlist:function () {
         var that=this;
@@ -47,11 +56,9 @@
         }
         that.$fetch('stayshipment', datas)
           .then((response) => {
+            that.statu = true;
             var reportlist = response.data;
-            console.log(reportlist)
             reportlist.forEach(function(item,index){
-              console.log(item);
-              //var times = reportlist[index].time.substring(0,10)
             });
             that.reportlist = reportlist;
           })

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { Toast } from 'mint-ui';
+import { Toast , Indicator} from 'mint-ui';
 import global_  from './globalVariable';
 
 axios.defaults.timeout = 20000;
@@ -54,7 +54,6 @@ axios.interceptors.response.use(
             }
             window.location.href = global_.wwwUrl+'#/startpage';
         }
-
         return response;
     },
     error => {
@@ -72,32 +71,28 @@ axios.interceptors.response.use(
 
 export function fetch(url,params={}){
     return new Promise((resolve,reject) => {
+      // Indicator.open({
+      //   text: '加载中...',
+      //   spinnerType: 'fading-circle'
+      // });
         axios.get(global_.apiUrl+url,{
             params:params
-
+        }).then(response => {
+          if(response.data.code==200){
+            resolve(response.data);
+          }else {
+            Toast({
+              duration: 1500,       // 持续展示 toast
+              forbidClick: true, // 禁用背景点击
+              loadingType: 'text',
+              message: response.data.msg
+            });
+            resolve(response.data);
+            }
+          // Indicator.close()
+        }).catch(err => {
+          reject(err)
         })
-            .then(response => {
-                if(response.data.code==200){
-                    resolve(response.data);
-                }else {
-                    Toast({
-                        duration: 1500,       // 持续展示 toast
-                        forbidClick: true, // 禁用背景点击
-                        loadingType: 'text',
-                        message: response.data.msg
-                    });
-                    resolve(response.data);
-                }
-
-                // Toast.clear
-
-
-            })
-            .catch(err => {
-                reject(err)
-
-
-            })
     })
 }
 

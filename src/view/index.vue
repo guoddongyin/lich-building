@@ -1,13 +1,13 @@
 
 <template>
   <div>
-    <div class="index1">
+    <div :class="member.memberstatus==0?'index':oneinfo.MemberType=='零售客户'?'index1':'index2'" v-if="statu">
       <div class="touxiang" @click="()=>{this.$router.push({path:'/information',query:{}})}">
         <img :src="member.headimgurl" alt=""/></div>
       <div class="name">
-        <div>{{member.nickname}}</div>
+        <div class="mingzi">{{member.nickname}}</div>
         <div class="bangdin" v-if="member.memberstatus!=1" @click="gotobangd">点击绑定会员卡</div>
-        <div class="bangdin" v-else >{{oneinfo.MemberCard}}</div>
+        <div class="bangdin" v-else @click="()=>{this.$router.push({path:'/memberinfo',query:{}})}">{{oneinfo.MemberCard}}</div>
       </div>
       <div class="bangdin1" v-if="member.memberstatus==1">{{oneinfo.MemberType}}</div>
       <div class="jifenn">
@@ -21,7 +21,7 @@
         </div>
       </div>
     </div>
-
+  <div :style="!statu ? 'padding-top: 170px' : ''" >
     <div class="we-title">我的工具</div>
     <div class="weui-grids">
       <div class="weui-grid js_grid" @click="()=>{this.$router.push({path:'/coupon',query:{}})}">
@@ -32,15 +32,7 @@
           我的优惠券
         </p>
       </div>
-      <div class="weui-grid js_grid" @click="()=>{this.$router.push({path:'/memberinfo',query:{}})}" v-if="member.memberstatus!=0">
-        <div class="weui-grid__icon">
-          <img src="../../static/img/hyxx.png" alt="">
-        </div>
-        <p class="weui-grid__label">
-          会员信息
-        </p>
-      </div>
-      <div class="weui-grid js_grid" @click="()=>{this.$router.push({path:'/integral-detail',query:{}})}">
+      <div class="weui-grid js_grid" @click="()=>{this.$router.push({path:'/integral-detail',query:{memberCard:oneinfo.MemberCard}})}" v-if="member.memberstatus!=0">
         <div class="weui-grid__icon">
           <img src="../../static/img/icon-jf.png" alt="">
         </div>
@@ -48,7 +40,7 @@
           积分明细
         </p>
       </div>
-      <div class="weui-grid js_grid" @click="()=>{this.$router.push({path:'/reportlist',query:{}})}">
+      <div class="weui-grid js_grid" @click="()=>{this.$router.push({path:'/reportlist',query:{}})}" v-if="member.memberstatus!=0">
         <div class="weui-grid__icon">
           <img src="../../static/img/icon-dingdan.png" alt="">
         </div>
@@ -56,7 +48,7 @@
           我的订单
         </p>
       </div>
-      <div class="weui-grid js_grid" @click="()=>{this.$router.push({path:'/daichuhuo',query:{}})}">
+      <div class="weui-grid js_grid" @click="()=>{this.$router.push({path:'/daichuhuo',query:{}})}" v-if="member.memberstatus!=0">
         <div class="weui-grid__icon">
           <img src="../../static/img/icon-dch.png" alt="">
         </div>
@@ -64,7 +56,7 @@
           待出货
         </p>
       </div>
-      <div class="weui-grid js_grid" @click="()=>{this.$router.push({path:'/daifukuan',query:{}})}">
+      <div class="weui-grid js_grid" @click="()=>{this.$router.push({path:'/daifukuan',query:{}})}" v-if="member.memberstatus!=0">
         <div class="weui-grid__icon">
           <img src="../../static/img/icon-dfk.png" alt="">
         </div>
@@ -72,7 +64,7 @@
           待付款
         </p>
       </div>
-      <div class="weui-grid js_grid" @click="()=>{this.$router.push({path:'/brandprop',query:{}})}">
+      <div class="weui-grid js_grid" @click="()=>{this.$router.push({path:'/brandprop',query:{}})}" v-if="member.memberstatus!=0">
         <div class="weui-grid__icon">
           <img src="../../static/img/icon-pingp.png" alt="">
         </div>
@@ -88,7 +80,15 @@
           积分比例指导
         </p>
       </div>
-      <div class="weui-grid js_grid" @click="openConfirm">
+      <div class="weui-grid js_grid" @click="()=>{this.$router.push({path:'/articlelist',query:{}})}">
+        <div class="weui-grid__icon">
+          <img src="../../static/img/wenz.png" alt="">
+        </div>
+        <p class="weui-grid__label">
+          推广文章
+        </p>
+      </div>
+      <div class="weui-grid js_grid" @click="openConfirm" v-if="member.memberstatus!=0">
         <div class="weui-grid__icon">
           <img src="../../static/img/icon-xinyun.png" alt="">
         </div>
@@ -98,16 +98,18 @@
       </div>
     </div>
   </div>
+  </div>
 </template>
 
 <script>
-  import { MessageBox , Toast } from 'mint-ui';
+  import { MessageBox , Toast , Indicator } from 'mint-ui';
   export default {
     name: "index",
     data() {
       return {
-          member:[],//会员信息
-          oneinfo:[],//会员信息
+        member:[],//会员信息
+        oneinfo:[],//会员信息
+        statu:false
       }
     },
     mounted(){
@@ -125,10 +127,10 @@
         }
         that.$fetch('oneinfo', datas)
           .then((response) => {
+            that.statu = true
             var oneinfo = response.data;
             if(oneinfo){
                 that.oneinfo = oneinfo;
-
             }else {
                 //
             }
@@ -140,8 +142,13 @@
           var that=this;
           var datas={
           }
+        Indicator.open({
+          text: '加载中...',
+          spinnerType: 'fading-circle'
+        });
           that.$fetch('member', datas)
               .then((response) => {
+                Indicator.close()
                   var member = response.data;
                   that.member = member;
               })
@@ -159,6 +166,74 @@
 
 <style type="text/scss" lang="scss" scoped>
   .index{
+    width:690px;
+    height:380px;
+    margin: auto;
+    position: relative;
+    background: url("../../static/img/puton.png");
+    background-size: 100% 100%;
+    .bangdin1{
+      font-size: 24px;
+      position: absolute;
+      top: 40px;
+      right: 40px;
+      color: #333;
+    }
+    .touxiang{
+      width: 150px;
+      height: 150px;
+      padding: 50px 40px;
+      img{
+        width: 100%;
+        border-radius:50%
+      }
+    }
+    .jifenn{
+      position: absolute;
+      bottom: 50px;
+      left: 0;
+      width: 100%;
+      .jifen{
+        width: 50%;
+        text-align: center;
+        float: left;
+        .shuzi{
+          color: #333;
+          font-size: 34px;
+        }
+        .title{
+          font-size: 22px;
+          color: #333;
+        }
+        p{
+          display: block;
+        }
+      }
+    }
+    .name{
+      width: auto;
+      text-align: left;
+      position: absolute;
+      top: 80px;
+      left: 200px;
+      color: #333;
+    }
+    .mingzi{
+      font-size: 34px;
+    }
+    .bangdin{
+      font-size: 24px;
+      margin-top: 10px
+    }
+    .jifen{
+      width: 100%;
+      .jifn{
+        width: 50%;
+      }
+    }
+
+  }
+  .index1{
      width:690px;
      height:380px;
      margin: auto;
@@ -212,15 +287,16 @@
      .name{
        width: auto;
        text-align: left;
-       font-size: 34px;
        position: absolute;
-       top: 100px;
+       top: 80px;
        left: 200px;
        background-image: -webkit-gradient(linear, 0 0, 0 bottom, from(#eea76e), to(#ffdba9));
        -webkit-background-clip: text;
        -webkit-text-fill-color: transparent;
      }
-
+    .mingzi{
+      font-size: 34px;
+    }
      .bangdin{
        font-size: 24px;
        margin-top: 10px
@@ -233,13 +309,13 @@
      }
 
    }
-  .index1{
+  .index2{
     width:690px;
     height:380px;
     margin: auto;
+    position: relative;
     background: url("../../static/img/jinka.png");
     background-size: 100% 100%;
-    position: relative;
     .bangdin1{
       font-size: 24px;
       position: absolute;
@@ -289,11 +365,14 @@
       text-align: left;
       font-size: 34px;
       position: absolute;
-      top: 100px;
+      top: 80px;
       left: 200px;
       background-image: -webkit-gradient(linear, 0 0, 0 bottom, from(#4e3623), to(#69512e));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
+    }
+    .mingzi{
+      font-size: 34px;
     }
     .bangdin{
       font-size: 24px;

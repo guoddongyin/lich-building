@@ -4,8 +4,8 @@
       <mt-search autofocus v-model="value" :result="filterResult"></mt-search>
     </div>
     <div class="integral-title">
-      <div class="shijian"><input type="date" placeholder="下单起止时间"/></div>
-      <div class="shijian"><input type="date" placeholder="下单结束时间"/></div>
+      <div class="shijian"><input  placeholder="下单起止时间"/></div>
+      <div class="shijian"><input  placeholder="下单结束时间"/></div>
       <div class="chaxun"><mt-button type="default">查询</mt-button></div>
     </div>
     <div class="integral-title">
@@ -13,16 +13,18 @@
       <div class="jifen">单据号</div>
       <div class="jifen">金额</div>
     </div>
-    <div class="nomes-content" v-if="reportlist.length==0">
-      <div class="nomes">
-        <img src='../../../static/img/nosj.png'></img>
+    <div>
+      <div class="integral-detail" v-for="item in reportlist" @click="go_deil(item.ids)">
+        <div class="jifen">{{item.CreateDate}}</div>
+        <div class="jifen">{{item.Code}}</div>
+        <div class="jifen">{{item.DocTotal}}</div>
       </div>
-      <div class='zhu'>暂无订单信息</div>
-    </div>
-    <div class="integral-detail" v-for="item in reportlist">
-      <div class="jifen">{{item.CreateDate}}</div>
-      <div class="jifen">{{item.Code}}</div>
-      <div class="jifen">{{item.DocTotal}}</div>
+      <div class="nomes-content" v-if="reportlist.length==0&&statu">
+        <div class="nomes">
+          <img src='/static/img/nosj.png'></img>
+        </div>
+        <div class='zhu'>暂无订单信息</div>
+      </div>
     </div>
   </div>
 </template>
@@ -34,32 +36,35 @@
     data() {
       return {
         value: '',
+        defaultResult: [
+          'Apple',
+          'Banana',
+        ],
+        statu:false,
         reportlist:[],
-        //time:''
       };
-    },
-    methods: {
-      //获取待付款信息
-      getreportlist:function () {
-        var that=this;
-        var datas={
-
-        }
-        that.$fetch('staypay', datas)
-          .then((response) => {
-            var reportlist = response.data;
-            console.log(reportlist)
-            reportlist.forEach(function(item,index){
-              console.log(item);
-              //var times = reportlist[index].datetime.substring(0,10)
-            });
-            that.reportlist = reportlist;
-          })
-      },
-
     },
     mounted(){
       this.getreportlist();
+    },
+    methods: {
+      //跳转详情页面
+      go_deil : function (id) {
+        this.$router.push({path:'/report-detail',query:{id:id}})
+      },
+      //获取待付款信息
+      getreportlist:function () {
+        var that=this;
+        var datas={}
+        that.$fetch('staypay', datas)
+          .then((response) => {
+            that.statu = true;
+            var reportlist = response.data;
+            that.reportlist = reportlist;
+
+          })
+      },
+
     },
     computed: {
       filterResult() {

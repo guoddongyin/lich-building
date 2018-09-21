@@ -101,7 +101,7 @@
       width: 33.33333%;
       color: #fff;
       .title {
-        font-size: 20px;
+        font-size: 30px;
         padding-bottom: 10px;
       }
       .shuzi {

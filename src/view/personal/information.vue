@@ -7,19 +7,19 @@
       <span>{{ personal.nickname }}</span>
     </mt-cell>
     <mt-cell title="手机号">
-      <span>{{ personal.tel==null?"未绑定":personal.tel}}</span>
+      <span>{{(personal.tel==0||personal.tel==null)?"未绑定":personal.tel}}</span>
     </mt-cell>
     <mt-cell title="地区" is-link>
       <span>{{personal.province}}</span>
     </mt-cell>
     <mt-cell title="详细地址" is-link @click.native="openPrompt">
-      <span>{{personal.address==null?"请输入详细地址":personal.address}}</span>
+      <span>{{(personal.address==null || personal.address==0)?"请输入详细地址":personal.address}}</span>
     </mt-cell>
     <mt-cell title="性别" is-link>
       <span>{{personal.sex==2?"女":"男"}}</span>
     </mt-cell>
     <mt-cell title="生日" is-link @click.native="open('picker4')">
-      <span>{{personal.birthday==null?'请输入生日':personal.birthday}}</span>
+      <span>{{(personal.birthday==null || personal.birthday==0)?'请输入生日':personal.birthday}}</span>
     </mt-cell>
     <mt-cell title="解绑会员卡" is-link @click.native="openConfirm">
       <span></span>
@@ -64,8 +64,9 @@
       },
       //解绑会员卡
       openConfirm() {
+        console.log(111)
         var that=this;
-        if(that.personal.memberstatus==1){
+         if(that.personal.memberstatus==1){
           MessageBox.confirm('', {
             message: '是否确认解绑会员卡?',
             title: '提示',
@@ -73,6 +74,10 @@
             cancelButtonText: '取消'
           }).then(action => {
             if (action == 'confirm') {     //确认的回调
+              console.log(111)
+              var datas = {
+                wxid:localStorage.getItem('token')
+              }
               that.$fetch('nobind', datas)
                 .then((response) => {
                   Toast({
@@ -87,7 +92,8 @@
               console.log(2);
             }
           });
-        }else{
+        }
+        else{
           MessageBox.alert('', {
             message: '您还未绑定会员卡',
             title: '提示',
@@ -133,9 +139,6 @@
       }
     },
     filters: {
-      // text(s) {
-      //   return s === '' || s === 'null' ? '未填写' : s
-      // },
     }
   };
 </script>

@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="page-sear">
-      <mt-search autofocus v-model="value" :result="filterResult"></mt-search>
+      <mt-search autofocus v-model="value" :result="filterResult" placeholder="搜索单据号"></mt-search>
     </div>
     <div class="integral-title">
       <div class="shijian"><input  placeholder="下单起止时间"/></div>

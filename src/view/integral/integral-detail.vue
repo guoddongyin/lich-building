@@ -27,6 +27,10 @@
           <mt-cell v-else :title="item.jftype" :label="item.createdate" v-for="(item,index) in jflslist"  :key="index" v-else>
             <span style="color: #eb4f4f">{{item.jf}}</span>
           </mt-cell>
+          <p v-show="loading" class="page-infinite-loading">
+            <mt-spinner type="fading-circle"></mt-spinner>
+            加载中...
+          </p>
         </div>
     </div>
 </template>
@@ -39,21 +43,28 @@
             return {
                 value: '',
                 useroneinfo: '',
-                jflslist:[],
-                statu:false
+                jflslist:[],//积分数据列表
+                statu:false,//
+                loading: false,
+                allLoaded: false,
+                wrapperHeight: 0
             };
         },
         mounted() {
-            this.getuserinfo();
-            this.getjflslist();
+          this.getuserinfo();
+          this.getjflslist();
+          this.wrapperHeight = document.documentElement.clientHeight - this.$refs.wrapper.getBoundingClientRect().top;
+          for (let i = 1; i <= 20; i++) {
+            this.jflslist.push(i);
+          }
         },
         methods: {
           loadMore() {
             this.loading = true;
             setTimeout(() => {
-              let last = this.list[this.list.length - 1];
+              let last = this.jflslist[this.jflslist.length - 1];
               for (let i = 1; i <= 10; i++) {
-                this.list.push(last + i);
+                this.jflslist.push(last + i);
               }
               this.loading = false;
             }, 2500);
@@ -92,6 +103,43 @@
 </script>
 
 <style lang="scss" scoped>
+  @component-namespace page {
+    @component infinite {
+      @descendent desc {
+        text-align: center;
+        color: #666;
+        padding-bottom: 5px;
+        border-bottom: solid 1px #eee;
+      }
+
+      @descendent listitem {
+        height: 50px;
+        line-height: 50px;
+        border-bottom: solid 1px #eee;
+        text-align: center;
+        &:first-child {
+          border-top: solid 1px #eee;
+        }
+      }
+
+      @descendent wrapper {
+        margin-top: -1px;
+        overflow: scroll;
+      }
+
+      @descendent loading {
+        text-align: center;
+        height: 50px;
+        line-height: 50px;
+
+        div {
+          display: inline-block;
+          vertical-align: middle;
+          margin-right: 5px;
+        }
+      }
+    }
+  }
     .page-search {
         height: 100%;
     }
@@ -149,4 +197,5 @@
     }
 
 </style>
+
 

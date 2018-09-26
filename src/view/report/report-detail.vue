@@ -6,7 +6,7 @@
     <mt-cell title="单据号">
       <span>{{reportdellist.Code}}</span>
     </mt-cell>
-    <mt-cell title="金额" is-link>
+    <mt-cell title="金额">
       <span style="color: #eb4f4f">{{reportdellist.TrueAmount}}</span>
     </mt-cell>
     <mt-cell title="欠款">

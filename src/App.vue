@@ -10,19 +10,23 @@
     data(){
       return{
         url:'',//保存链接
+        jssdklist:[]
       }
+    },
+    mounted(){
+      //this.initShare();
     },
     methods: {
 
     },
-      watch: {
-          $route(to) {
-              var  token= this.$route.query.token;
-              if(token){
-                  localStorage.setItem('token',token)
-              }
-          }
+    watch: {
+      $route(to) {
+        var  token= this.$route.query.token;
+        if(token){
+          localStorage.setItem('token',token)
+        }
       }
+    }
   }
 </script>
 

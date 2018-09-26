@@ -25,7 +25,7 @@ let router = new VueRouter({
     },{
       path: '/integralprop',
       component: resolve => require(['../view/integral/integralprop.vue'], resolve),
-      name: '积分比例',
+      name: '积分比例指导',
     },{
       path: '/integral-detail',
       component: resolve => require(['../view/integral/integral-detail.vue'], resolve),

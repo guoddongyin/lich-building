@@ -14,14 +14,14 @@
 <style lang="scss" type="text/scss" scoped>
   .integral-title{
     width: 100%;
-    height: 90px;
-    background-color: #fff;
+    height: 2.8125rem;
+    background-color: #51aa38;
     display: flex;
-    line-height: 90px;
+    line-height: 2.8125rem;
     text-align: center;
-    font-size: 30px;
-    color: #333;
-    border-bottom: 1px solid #f2f2f2;
+    font-size: 0.9375rem;
+    color: #fff;
+    border-bottom: 0.03125rem solid #f2f2f2;
     .jifen{
       width: 30%;
       border-right: 1px solid #ccc;
@@ -32,12 +32,16 @@
       padding: 0px 20px;
     }
   }
+  .integral-fen:nth-child(even){
+    background-color:#fff;
+  }
   .integral-fen{
     width: 100%;
     display: flex;
     border-bottom: 1px solid #f2f2f2;
     text-align: center;
     color: #333;
+    height: 200px;
     .jifen{
       width: 30%;
       border-right: 1px solid #ccc;
@@ -46,13 +50,14 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      background-color: #fff;
+      /*background-color: #fff;*/
+      color: #51aa38;
     }
     .pinpai{
       width: 70%;
       padding: 30px 20px;
       font-size: 24px;
-      background-color: #fff;
+      text-align: left;
     }
   }
 </style>

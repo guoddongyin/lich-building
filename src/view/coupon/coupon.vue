@@ -20,10 +20,11 @@
   <mt-button class="bangding" type="default"  size="large" @click="lingqu">领取优惠券</mt-button>
   </div>
   <!--mask-->
-  <div class="mask" v-if="status" @click="close">
+  <div class="mask" v-if="status">
     <div class="modal">
       <div>
         <div class="alert_popup-content">
+          <div class="close" @click="close">×</div>
           <div class="title">
             <div>使用说明</div>
           </div>
@@ -133,7 +134,19 @@
     border-radius: 15px;
   }
   .alert_popup-content {
-    padding: 30px 15px;
+    padding: 50px 25px;
+  }
+  .close{
+    width: 40px;
+    height: 40px;
+    background-color: rgba(0,0,0,.5);
+    color: #fff;
+    text-align: center;
+    line-height: 40px;
+    border-radius: 20px;
+    position: absolute;
+    right: 90px;
+    top: 160px;
   }
   .title{
     font-size: 40px;

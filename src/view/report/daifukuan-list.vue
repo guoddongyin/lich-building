@@ -17,7 +17,7 @@
       <div class="integral-detail" v-for="item in reportlist" @click="go_deil(item.ids)">
         <div class="jifen">{{item.CreateDate}}</div>
         <div class="jifen">{{item.Code}}</div>
-        <div class="jifen">{{item.DocTotal}}</div>
+        <div class="jifen">{{DocTotal}}元</div>
       </div>
       <div class="nomes-content" v-if="reportlist.length==0&&statu">
         <div class="nomes">
@@ -60,6 +60,10 @@
           .then((response) => {
             that.statu = true;
             var reportlist = response.data;
+            reportlist.forEach(function(item,index){
+              var DocTotal = reportlist[index].DocTotal.substring(0,reportlist[index].DocTotal.indexOf(".") + 3)
+              that.DocTotal = DocTotal
+            });
             that.reportlist = reportlist;
 
           })
@@ -118,6 +122,7 @@
         background-color: #fff;
         border: 0;
         border-radius: 10px;
+        text-align: center;
       }
 
     }

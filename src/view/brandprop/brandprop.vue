@@ -5,7 +5,6 @@
     <div class="pintitle">TOP5品牌占比</div>
     <div id="main" :style="{width:'100%',height:'280px'}"></div>
   </div>
-  <div class="line"></div>
   <div id="main2" style="width:90%;height:280px;margin: auto"></div>
 </div>
 </template>
@@ -38,8 +37,9 @@
                           datavalue.push(that.couponlist[i].top5)
                           dataradius.push({
                               value:that.couponlist[i].top5,
-                              name:that.couponlist[i].brand
+                              name:that.couponlist[i].top5
                           })
+
                       }
                       that.seteachart_botom(dataname,datavalue);
                       that.seteachart_top(dataradius)
@@ -52,9 +52,13 @@
                       {
                           type: 'pie',
                           radius: '55%',
-                          data:dataradius,
+                          data:dataradius
                       }
                   ],
+                legend: {
+                  bottom: 'bottom',
+                  data: dataradius
+                },
                   color:['#199375', '#db8245','#3ffed0','#6d6d6d','#0b0b0c']
               });
           },

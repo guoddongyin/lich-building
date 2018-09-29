@@ -75,14 +75,10 @@ let router = new VueRouter({
       path: '/articledel',
       component: resolve => require(['../view/article/articledel.vue'], resolve),
       name: '文章详情',
-    // },{
-    //   path: '/main',
-    //   component: resolve => require(['../view/public/main.vue'], resolve),
-    //   name: '文章详情',
-    // },{
-    //   path: '/dialog',
-    //   component: resolve => require(['../view/public/dialog.vue'], resolve),
-    //   name: '文章详情',
+    },{
+      path: '/luckydraw',
+      component: resolve => require(['../view/luckydraw/luckydraw.vue'], resolve),
+      name: '幸运大抽奖',
     }]
 });
   export default router

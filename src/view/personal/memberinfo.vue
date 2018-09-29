@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="integral-title">
+    <div class="integral-title1">
       <div class="jifen">
         <p class="title">会员卡号</p>
         <p class="shuzi">{{oneinfo.MemberCard}}</p>
@@ -86,7 +86,7 @@
       text-align: center;
     }
   }
-  .integral-title {
+  .integral-title1 {
     width: 100%;
     height: 230px;
     background: url("../../../static/img/bjjg.png");

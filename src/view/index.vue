@@ -88,7 +88,7 @@
           推广文章
         </p>
       </div>
-      <div class="weui-grid js_grid" @click="openConfirm" v-if="member.memberstatus!=0">
+      <div class="weui-grid js_grid" v-if="member.memberstatus!=0">
         <div class="weui-grid__icon">
           <img src="../../static/img/icon-xinyun.png" alt="">
         </div>
@@ -142,10 +142,10 @@
           var that=this;
           var datas={
           }
-        Indicator.open({
-          text: '加载中...',
-          spinnerType: 'fading-circle'
-        });
+        // Indicator.open({
+        //   text: '加载中...',
+        //   spinnerType: 'fading-circle'
+        // });
           that.$fetch('member', datas)
               .then((response) => {
                 Indicator.close()

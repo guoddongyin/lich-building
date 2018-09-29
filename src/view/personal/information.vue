@@ -48,6 +48,12 @@
     },
     mounted(){
       this.getinformation();
+      let that = this;
+      // 添加返回事件监听
+      window.addEventListener("popstate", function(e) {
+        console.log(e)
+        MessageBox.close(false);
+      }, false);
     },
     methods: {
       //获取用户信息

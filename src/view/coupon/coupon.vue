@@ -153,6 +153,9 @@
     text-align: center;
     padding-bottom: 10px;
   }
+  .alert_popup_ul{
+    list-style: none;
+  }
   .alert_popup_ul .cont{
     text-indent: 40px;
     line-height: 48px;
@@ -164,7 +167,7 @@
     height: 20px;
     background-color: #51aa38;
     display: inline-block;
-    border-radius: 10px;
+    border-radius: 50%;
   }
   .couponlist{
     width: 90%;

@@ -3,16 +3,16 @@
   <div class="del_box">
     <div class="title">{{articledel.title}}</div>
     <div class="time">
+      <span class="auther" @click="go_deil">{{articledel.author}}</span>
       <span>
         {{articledel.updatetime}}</span>
       <span>
         阅读量：{{articledel.read_num}}次</span>
     </div>
-    <div class="auther">{{articledel.author}}</div>
-    <div class="lichenimg"><img src="../../../static/img/banner.png" alt=""/></div>
+    <div class="lichenimg"><img :src="articledel.img" alt=""/></div>
     <div class="zuozhe">
       <p>作者 | {{articledel.author}}</p>
-      <p style="padding-top: 3px">介绍 | {{articledel.introduce}}</p>
+      <p style="padding-top: 3px">介绍 | {{articledel.introduce==null?'无':articledel.introduce}}</p>
     </div>
     <div class="qm_del_box" v-html="articledel.content">
     </div>
@@ -30,6 +30,10 @@
       };
     },
     methods: {
+      //
+      go_deil : function () {
+        this.$router.push({path:'/index',query:{}})
+      },
       //获取文章列表信息
       getarticledel:function () {
         var that=this;
@@ -55,8 +59,6 @@
         console.log(datas)
         that.$fetch('shareInfo', datas)
           .then((response) => {
-            console.log(datas)
-            console.log(response.data.jssdk)
             var jssdklist = response.data.jssdk
             that.jssdklist = jssdklist
             wx.config({
@@ -83,7 +85,7 @@
               wx.onMenuShareAppMessage({
                 title: that.articledel.title, // 分享标题
                 desc:that.articledel.sub_title,
-                link: window.location.href, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+                link: that.jssdklist.url, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
                 imgUrl: that.articledel.img, // 分享图标
                 success: function () {
                   // 用户点击了分享后执行的回调函数
@@ -105,13 +107,13 @@
   }
   .auther{
     padding:10px 0;
-    font-size: 28px;
+    font-size: 30px;
     color: #0580f3;
   }
   .zuozhe{
-    font-size: 26px;
+    font-size: 30px;
     font-weight: 700;
-    padding: 10px 0;
+    padding: 20px 0;
     color: #333333;
   }
   .lichenimg{
@@ -139,11 +141,13 @@
     font-size:38px;
   }
   .time{
-    font-size: 26px;
+    font-size: 30px;
     color:#808080;
-    padding-top: 15px;
+    padding: 20px 0;
   }
-  .time span:nth-child(2){
-    margin-left: 30px;
+  .time span:nth-child(3){
+    /*margin-left: 30px;*/
+    display: inline-block;
+    float: right;
   }
 </style>

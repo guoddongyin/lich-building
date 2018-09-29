@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="integral-title">
+        <div class="integral-title1">
             <div class="jifen">
                 <p class="title">已使用积分</p>
                 <p class="shuzi">{{useroneinfo.SYJF==null?0:useroneinfo.SYJF}}</p>
@@ -15,9 +15,7 @@
             </div>
         </div>
         <div class="we-title">积分明细</div>
-        <div v-infinite-scroll="loadMore"
-             infinite-scroll-disabled="loading"
-             infinite-scroll-distance="10">
+        <div>
           <div class="nomes-content" v-if="jflslist.length==0&&statu">
             <div class="nomes">
               <img src='../../../static/img/nosj.png'></img>
@@ -27,10 +25,10 @@
           <mt-cell v-else :title="item.jftype" :label="item.createdate" v-for="(item,index) in jflslist"  :key="index" v-else>
             <span style="color: #eb4f4f">{{item.jf}}</span>
           </mt-cell>
-          <p v-show="loading" class="page-infinite-loading">
-            <mt-spinner type="fading-circle"></mt-spinner>
-            加载中...
-          </p>
+          <!--<p v-show="loading" class="page-infinite-loading">-->
+            <!--<mt-spinner type="fading-circle"></mt-spinner>-->
+            <!--加载中...-->
+          <!--</p>-->
         </div>
     </div>
 </template>
@@ -45,30 +43,30 @@
                 useroneinfo: '',
                 jflslist:[],//积分数据列表
                 statu:false,//
-                loading: false,
-                allLoaded: false,
-                wrapperHeight: 0
+                // loading: false,
+                // allLoaded: false,
+                // wrapperHeight: 0
             };
         },
         mounted() {
           this.getuserinfo();
           this.getjflslist();
-          this.wrapperHeight = document.documentElement.clientHeight - this.$refs.wrapper.getBoundingClientRect().top;
+          // this.wrapperHeight = document.documentElement.clientHeight - this.$refs.wrapper.getBoundingClientRect().top;
           for (let i = 1; i <= 20; i++) {
             this.jflslist.push(i);
           }
         },
         methods: {
-          loadMore() {
-            this.loading = true;
-            setTimeout(() => {
-              let last = this.jflslist[this.jflslist.length - 1];
-              for (let i = 1; i <= 10; i++) {
-                this.jflslist.push(last + i);
-              }
-              this.loading = false;
-            }, 2500);
-          },
+          // loadMore() {
+          //   this.loading = true;
+          //   setTimeout(() => {
+          //     let last = this.jflslist[this.jflslist.length - 1];
+          //     for (let i = 1; i <= 10; i++) {
+          //       this.jflslist.push(last + i);
+          //     }
+          //     this.loading = false;
+          //   }, 2500);
+          // },
             getuserinfo: function () {
               var that = this;
               var datas = {}
@@ -163,7 +161,7 @@
         text-align: center;
       }
     }
-    .integral-title {
+    .integral-title1 {
         width: 100%;
         height: 230px;
         background: url("../../../static/img/neirong1_02.png");
@@ -178,7 +176,7 @@
             width: 33.33333%;
             color: #fff;
             .title {
-              font-size: 20px;
+              font-size: 30px;
               padding-bottom: 10px;
               position: static;
             }

@@ -6,7 +6,7 @@
     </div>
     <div class="integral-fen" v-for="(item,index) in jfpslist" :key="index">
       <div class="jifen">{{item.title}}</div>
-      <div class="pinpai">{{item.content}}</div>
+      <div class="pinpai" v-html="item.content"> </div>
     </div>
 
   </div>

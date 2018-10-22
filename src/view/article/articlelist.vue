@@ -2,7 +2,7 @@
   <div>
     <mt-swipe class="wz-banner" :auto="3000" ref="mtSwipe"  :continuous="true" @change="handleChange">
       <mt-swipe-item class="slide1" v-if="bannerarr.length==0"><img src="../../../static/img/nosj.png" alt=""/></mt-swipe-item>
-      <mt-swipe-item class="slide1" v-for="item in bannerarr"><img :src="item.stick_img" alt=""/></mt-swipe-item>
+      <mt-swipe-item class="slide1" v-for="(item,index) in bannerarr" :key="index"><img :src="item.stick_img"  alt=""/></mt-swipe-item>
     </mt-swipe>
     <div class="page-navbar">
       <mt-navbar class="page-part" v-model="selected">
@@ -13,7 +13,7 @@
       </div>
       <mt-tab-container v-model="selected">
         <mt-tab-container-item :id="items.id" v-for="(items,index) in fenlei" :key="index">
-        <div class="qm_box" v-for="item in articlelist" @click="go_deil(item.id)" v-if="items.id==item.class_id">
+        <div class="qm_box" v-for="(item,index) in articlelist" :key="index" @click="go_deil(item.id)" v-if="items.id==item.class_id">
           <div class="qm_one_box">
             <div class="text_box">
               <p>{{item.title}}</p>
